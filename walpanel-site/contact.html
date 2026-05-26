@@ -8,7 +8,7 @@
 <meta name="description" content="Book a showroom visit, request a delivery quote, order samples, or get an installation quote. Chatsworth, CA 91311 — by appointment only.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
   .tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line);margin-bottom:30px;padding:0 40px;max-width:1440px;margin-left:auto;margin-right:auto}
@@ -67,7 +67,10 @@
 
   <div>
     <!-- SHOWROOM VISIT FORM -->
-    <form class="form-card form-panel active" data-panel="visit" action="thank-you.html" method="get">
+    <form class="form-card form-panel active" data-panel="visit" action="https://formspree.io/f/xpqnoajd" method="POST">
+      <input type="hidden" name="_subject" value="New lead — Showroom visit">
+      <input type="hidden" name="form_source" value="Showroom visit">
+      <input type="hidden" name="_next" value="https://walpanel-site.walpanelsales.workers.dev/thank-you.html">
       <h2>Book a showroom visit</h2>
       <p class="form-sub">Showroom is by appointment only. Tell us when works and what you'd like to see.</p>
       <div class="grid-2">
@@ -99,7 +102,10 @@
     </form>
 
     <!-- PROJECT QUOTE FORM -->
-    <form class="form-card form-panel" data-panel="quote" action="thank-you.html" method="get">
+    <form class="form-card form-panel" data-panel="quote" action="https://formspree.io/f/xpqnoajd" method="POST">
+      <input type="hidden" name="_subject" value="New lead — Project quote">
+      <input type="hidden" name="form_source" value="Project quote">
+      <input type="hidden" name="_next" value="https://walpanel-site.walpanelsales.workers.dev/thank-you.html">
       <h2>Project quote</h2>
       <p class="form-sub">Send your project scope and we'll come back with a written quote — usually within one business day.</p>
       <div class="grid-2">
@@ -128,7 +134,10 @@
     </form>
 
     <!-- DELIVERY QUOTE -->
-    <form class="form-card form-panel" data-panel="delivery" action="thank-you.html" method="get">
+    <form class="form-card form-panel" data-panel="delivery" action="https://formspree.io/f/xpqnoajd" method="POST">
+      <input type="hidden" name="_subject" value="New lead — Delivery quote">
+      <input type="hidden" name="form_source" value="Delivery quote">
+      <input type="hidden" name="_next" value="https://walpanel-site.walpanelsales.workers.dev/thank-you.html">
       <h2>Delivery quote</h2>
       <p class="form-sub">Local delivery is $150–$500 within ~60 miles, quoted per job. Give us the details below and a delivery partner will quote within 1 business day.</p>
       <div class="grid-2">
@@ -152,7 +161,10 @@
     </form>
 
     <!-- SAMPLE ORDER -->
-    <form class="form-card form-panel" data-panel="sample" action="thank-you.html" method="get">
+    <form class="form-card form-panel" data-panel="sample" action="https://formspree.io/f/xpqnoajd" method="POST">
+      <input type="hidden" name="_subject" value="New lead — Sample order">
+      <input type="hidden" name="form_source" value="Sample order">
+      <input type="hidden" name="_next" value="https://walpanel-site.walpanelsales.workers.dev/thank-you.html">
       <h2>Sample order</h2>
       <p class="form-sub">Samples are $15 refundable deposit for showroom pickup, or $20 non-refundable for mail/ship. Tell us which colors and we'll have them ready.</p>
       <div class="grid-2">
@@ -178,7 +190,10 @@
     </form>
 
     <!-- INSTALL QUOTE -->
-    <form class="form-card form-panel" data-panel="install" action="thank-you.html" method="get">
+    <form class="form-card form-panel" data-panel="install" action="https://formspree.io/f/xpqnoajd" method="POST">
+      <input type="hidden" name="_subject" value="New lead — Installation quote">
+      <input type="hidden" name="form_source" value="Installation quote">
+      <input type="hidden" name="_next" value="https://walpanel-site.walpanelsales.workers.dev/thank-you.html">
       <h2>Installation quote</h2>
       <p class="form-sub">We offer installation by quote. We recommend visiting the showroom first so you can see and approve the product hands-on before scheduling install.</p>
       <div class="grid-2">
@@ -201,7 +216,10 @@
     </form>
 
     <!-- CUSTOM COLOR -->
-    <form class="form-card form-panel" data-panel="custom" action="thank-you.html" method="get">
+    <form class="form-card form-panel" data-panel="custom" action="https://formspree.io/f/xpqnoajd" method="POST">
+      <input type="hidden" name="_subject" value="New lead — Custom color">
+      <input type="hidden" name="form_source" value="Custom color">
+      <input type="hidden" name="_next" value="https://walpanel-site.walpanelsales.workers.dev/thank-you.html">
       <h2>Custom color order</h2>
       <p class="form-sub">For colors we don't stock, we can source through drop ship or special order. Terms depend on the color, quantity, and timeline — tell us what you need and we'll come back with specifics. Custom orders are typically pre-paid via Zelle.</p>
       <div class="grid-2">

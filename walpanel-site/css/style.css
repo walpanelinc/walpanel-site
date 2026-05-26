@@ -25,7 +25,7 @@
 html{scroll-behavior:smooth}
 body{
   font-family:'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-feature-settings:'ss01','cv11';
+  font-feature-settings:'kern';
   background:var(--paper);
   color:var(--ink);
   line-height:1.55;
@@ -45,7 +45,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
    ============================================ */
 
 .display, h1, h2, h3{
-  font-family:'Fraunces', Georgia, serif;
+  font-family:'Source Serif 4', Georgia, serif;
   font-weight:400;
   letter-spacing:-.02em;
   line-height:1;
@@ -109,7 +109,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
   gap:8px;
 }
 .brand-mark{
-  font-family:'Fraunces', serif;
+  font-family:'Source Serif 4', serif;
   font-weight:500;
   font-size:1.55rem;
   letter-spacing:-.03em;
@@ -262,7 +262,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 }
 .hero-tag strong{
   display:block;
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-size:1.15rem;
   font-weight:500;
   margin-bottom:4px;
@@ -283,7 +283,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
   gap:6px;
 }
 .hero-stat-num{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-size:2.4rem;
   font-weight:400;
   letter-spacing:-.03em;
@@ -389,7 +389,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
   letter-spacing:-.015em;
 }
 .product-price{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-size:1.5rem;
   color:var(--amber-deep);
   font-weight:400;
@@ -424,7 +424,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 }
 .spec strong{
   display:block;
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-size:1.05rem;
   font-weight:500;
   color:var(--ink);
@@ -539,7 +539,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
   gap:14px;
 }
 .value-num{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-size:1.05rem;
   color:var(--amber-deep);
   letter-spacing:.05em;
@@ -613,7 +613,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
   top:50%;left:50%;
   transform:translate(-50%,-50%);
   color:var(--paper);
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-size:1.4rem;
   letter-spacing:-.01em;
 }
@@ -651,7 +651,7 @@ footer{
   border-bottom:1px solid rgba(245,241,234,.15);
 }
 .footer-brand{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-size:1.8rem;
   letter-spacing:-.03em;
   margin-bottom:10px;
@@ -771,7 +771,7 @@ footer{
   gap:2px;
 }
 .chat-header-title strong{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-weight:500;
   font-size:1.15rem;
   letter-spacing:-.01em;
@@ -891,7 +891,7 @@ footer{
   font-size:.88rem;
 }
 .lead-form-title{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-weight:500;
   font-size:1.1rem;
   letter-spacing:-.01em;
@@ -1003,7 +1003,7 @@ footer{
   color:var(--ink-soft);
 }
 .sku-table .price{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-size:1.15rem;
   color:var(--ink);
   font-weight:500;
@@ -1037,7 +1037,7 @@ footer{
   margin:60px 0;
 }
 .calc h3{
-  font-family:'Fraunces', serif;
+  font-family:'Source Serif 4', serif;
   font-size:2.1rem;
   letter-spacing:-.02em;
   margin-bottom:6px;
@@ -1107,7 +1107,7 @@ footer{
 }
 .calc-line:last-of-type{border-bottom:none}
 .calc-line strong{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-weight:500;
   font-size:1.05rem;
 }
@@ -1126,7 +1126,7 @@ footer{
   text-transform:uppercase;
 }
 .calc-total strong{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-weight:400;
   font-size:2.4rem;
   letter-spacing:-.02em;
@@ -1293,7 +1293,7 @@ footer{
   padding:60px 40px;
 }
 .side-info h3{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-weight:500;
   font-size:1.45rem;
   letter-spacing:-.01em;
@@ -1378,7 +1378,7 @@ footer{
   border:1px solid var(--line-soft);
 }
 .success-card h1{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-size:2.6rem;
   letter-spacing:-.02em;
   margin-bottom:16px;
@@ -1399,7 +1399,7 @@ footer{
   margin:24px 0;
 }
 .info-strip h4{
-  font-family:'Fraunces',serif;
+  font-family:'Source Serif 4', serif;
   font-weight:500;
   font-size:1.2rem;
   letter-spacing:-.01em;
