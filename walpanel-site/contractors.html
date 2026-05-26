@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contractor Program | WalPanel Inc.</title>
+<link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+<meta name="description" content="Trade discount program for licensed contractors. Tiered volume pricing, project quote support, and referral bonuses for contractors who keep WalPanel in their rotation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(28, 36)"><rect x="0" y="0" width="16" height="128" rx="2" fill="currentColor"/><rect x="20" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="40" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="60" y="40" width="16" height="88" rx="2" fill="currentColor"/><rect x="80" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="100" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="120" y="0" width="16" height="128" rx="2" fill="currentColor"/></g></svg></span>
+      <span class="brand-text">
+        <span class="brand-mark">WalPanel</span>
+        <span class="brand-sub">Inc.</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="boards.html">Cladding</a></li>
+      <li><a href="fence.html">Fence</a></li>
+      <li><a href="trims.html">Trims</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contractors.html" class="active">Contractors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="contact.html">Visit Showroom</a>
+  </div>
+</nav>
+
+<section class="page-head" style="padding-top:60px">
+  <div>
+    <span class="eyebrow">Trade program</span>
+    <h1>Built for the<br>people who <em>build.</em></h1>
+  </div>
+  <p>If you're a licensed contractor, GC, or landscape architect, we want to work with you. Submit your license and we'll set you up with tiered pricing, dedicated quote turnaround, and a referral bonus for every customer you send our way.</p>
+</section>
+
+<section class="section" style="padding-top:30px">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">What you get</span>
+      <h2>Three tier program.</h2>
+    </div>
+    <p class="section-lead">Pricing follows industry standards plus our standing volume discount program. Once you're approved, your pricing applies across every order — no need to negotiate per job.</p>
+  </div>
+  <div class="values">
+    <div class="value">
+      <div class="value-num">01</div>
+      <h3>Trade pricing</h3>
+      <p>Tiered discount below retail, layered with project-specific quotes. Lock in your tier with one approved application.</p>
+    </div>
+    <div class="value">
+      <div class="value-num">02</div>
+      <h3>Same-day quotes</h3>
+      <p>Send us your project scope and a sales lead turns it into a written quote — usually same day during business hours.</p>
+    </div>
+    <div class="value">
+      <div class="value-num">03</div>
+      <h3>Referral bonus</h3>
+      <p>Refer a customer who places an order and earn credit toward your next purchase. Stackable across multiple referrals.</p>
+    </div>
+    <div class="value">
+      <div class="value-num">04</div>
+      <h3>Priority pickup</h3>
+      <p>Contractor orders get scheduled ahead of walk-ins. Same-day or next-day pickup with a phone call.</p>
+    </div>
+  </div>
+</section>
+
+<section class="two-col">
+  <form class="form-card" action="thank-you.html" method="get">
+    <h2>Contractor application</h2>
+    <p class="form-sub">Required fields marked with a dot. We'll review applications within 1 business day and confirm your trade tier by phone or email.</p>
+
+    <div class="grid-2">
+      <label class="req">Company name
+        <input type="text" name="company" required>
+      </label>
+      <label class="req">Contact name
+        <input type="text" name="name" required>
+      </label>
+    </div>
+
+    <div class="grid-2">
+      <label class="req">Phone
+        <input type="tel" name="phone" required placeholder="(555) 123-4567">
+      </label>
+      <label class="req">Email
+        <input type="email" name="email" required>
+      </label>
+    </div>
+
+    <label>License number (CA CSLB or other)
+      <input type="text" name="license" placeholder="e.g. 1234567">
+    </label>
+
+    <label>Trade focus
+      <select name="trade">
+        <option value="">Choose…</option>
+        <option>General contractor</option>
+        <option>Landscape contractor</option>
+        <option>Architect / Designer</option>
+        <option>Property management</option>
+        <option>Builder / Developer</option>
+        <option>Subcontractor — siding/cladding</option>
+        <option>Subcontractor — fence</option>
+        <option>Other</option>
+      </select>
+    </label>
+
+    <label>Typical project type &amp; volume
+      <textarea name="volume" placeholder="e.g. residential remodels, 200–500 sq ft of cladding per job, ~6 projects a year"></textarea>
+    </label>
+
+    <label>Upload license or business card (optional)
+      <input type="file" name="license-doc" accept="image/*,application/pdf">
+    </label>
+
+    <label>Anything else we should know?
+      <textarea name="notes"></textarea>
+    </label>
+
+    <button type="submit">Submit application</button>
+  </form>
+
+  <aside class="side-info">
+    <span class="eyebrow">How it works</span>
+    <h3>What happens next.</h3>
+    <dl>
+      <dt>01</dt><dd>You submit the application below with a copy of your license or business card.</dd>
+      <dt>02</dt><dd>Our sales team reviews and approves within 1 business day.</dd>
+      <dt>03</dt><dd>You get a tier confirmation by phone or email with your unique pricing.</dd>
+      <dt>04</dt><dd>Place orders by phone, in-person, or through the chat — your tier applies automatically.</dd>
+    </dl>
+
+    <h3>Why apply</h3>
+    <p style="font-size:.92rem; color:var(--ink-soft); line-height:1.6; margin-bottom:20px;">
+      Approved contractors receive net pricing below retail with terms that scale with order size, on top of our project-specific quotes. Combined with referral credit, that's meaningful margin on jobs where every dollar counts.
+    </p>
+
+    <h3>Questions?</h3>
+    <p style="font-size:.92rem; color:var(--ink-soft); line-height:1.6;">
+      Call or text the showroom number — sales answers contractor questions directly. Or use the chat at the bottom right.
+    </p>
+  </aside>
+</section>
+
+<section class="showroom">
+  <div>
+    <span class="eyebrow">Talk to sales</span>
+    <h2 style="margin-top:14px;">Book a contractor<br><em>walk-through.</em></h2>
+    <p class="section-lead" style="max-width:none;">Bring your project plans. We'll go through SKUs, accessory needs, lead time, and bundled pricing on one visit.</p>
+    <a class="btn btn-primary" href="contact.html">Book a visit</a>
+  </div>
+  <div class="showroom-map"></div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="footer-brand-logo" aria-hidden="true"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(28, 36)"><rect x="0" y="0" width="16" height="128" rx="2" fill="currentColor"/><rect x="20" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="40" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="60" y="40" width="16" height="88" rx="2" fill="currentColor"/><rect x="80" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="100" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="120" y="0" width="16" height="128" rx="2" fill="currentColor"/></g></svg></span><span>WalPanel Inc.</span></div>
+      <p class="footer-tag">Architectural WPC cladding and fence panels at factory-direct pricing. Serving Los Angeles and surrounding markets.</p>
+    </div>
+    <div>
+      <h4>Products</h4>
+      <ul>
+        <li><a href="boards.html">Cladding boards</a></li>
+        <li><a href="fence.html">Fence kits</a></li>
+        <li><a href="trims.html">L-Corners &amp; trim</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="gallery.html">Project gallery</a></li>
+        <li><a href="contractors.html">Contractor program</a></li>
+        <li><a href="docs/pricing-book.pdf">Pricing book (PDF)</a></li>
+        <li><a href="docs/fence-install.pdf">Fence install guide</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li>21350 Lassen St</li>
+        <li>Chatsworth, CA 91311</li>
+        <li>By appointment only</li>
+        <li><a href="contact.html">Contact us →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 WalPanel Inc. · All rights reserved.</span>
+    <span><a href="terms.html" style="opacity:.7;color:rgba(245,241,234,.7)">Terms &amp; conditions</a> · CA sales tax 9.75% added at checkout.</span>
+  </div>
+</footer>
+
+<button class="chat-bubble" id="chat-bubble" aria-label="Open chat">
+  <span class="chat-bubble-dot"></span>
+  Chat with us
+</button>
+<div class="chat-window" id="chat-window" role="dialog" aria-label="Chat with WalPanel">
+  <div class="chat-header">
+    <div class="chat-header-title">
+      <strong>WalPanel Chat</strong>
+      <span>Online · usually replies instantly</span>
+    </div>
+    <button class="chat-close" id="chat-close" aria-label="Close chat">×</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="msg msg-bot">Looking at the contractor program? I can answer general questions, but trade tier confirmation goes through sales directly. Want me to set up a callback?</div>
+  </div>
+  <div class="quick-replies" id="quick-replies">
+    <button class="quick-reply">How much discount?</button>
+    <button class="quick-reply">How do I apply?</button>
+    <button class="quick-reply">Talk to sales</button>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chat-input" placeholder="Type a message…" autocomplete="off">
+    <button class="chat-send" id="chat-send">Send</button>
+  </div>
+</div>
+
+<script src="js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="WalPanel">
+  <g transform="translate(28, 36)">
+    <rect x="0"    y="0"   width="16" height="128" rx="2" fill="currentColor"/>
+    <rect x="20"   y="6"   width="16" height="122" rx="2" fill="currentColor"/>
+    <rect x="40"   y="14"  width="16" height="114" rx="2" fill="currentColor"/>
+    <rect x="60"   y="40"  width="16" height="88"  rx="2" fill="currentColor"/>
+    <rect x="80"   y="14"  width="16" height="114" rx="2" fill="currentColor"/>
+    <rect x="100"  y="6"   width="16" height="122" rx="2" fill="currentColor"/>
+    <rect x="120"  y="0"   width="16" height="128" rx="2" fill="currentColor"/>
+  </g>
+</svg>
