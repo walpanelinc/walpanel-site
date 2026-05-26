@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact &amp; Showroom Visit | WalPanel Inc.</title>
+<link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+<meta name="description" content="Book a showroom visit, request a delivery quote, order samples, or get an installation quote. Chatsworth, CA 91311 — by appointment only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line);margin-bottom:30px;padding:0 40px;max-width:1440px;margin-left:auto;margin-right:auto}
+  .tab{padding:14px 22px;font-size:.92rem;font-weight:500;cursor:pointer;color:var(--ink-soft);position:relative;transition:color .2s;border:none;background:transparent}
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--ink)}
+  .tab.active::after{content:'';position:absolute;bottom:-1px;left:22px;right:22px;height:2px;background:var(--amber)}
+  .form-panel{display:none}
+  .form-panel.active{display:block}
+  @media (max-width:700px){.tabs{padding:0 20px;overflow-x:auto;flex-wrap:nowrap}.tab{padding:12px 16px;font-size:.85rem;white-space:nowrap}.tab.active::after{left:16px;right:16px}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(28, 36)"><rect x="0" y="0" width="16" height="128" rx="2" fill="currentColor"/><rect x="20" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="40" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="60" y="40" width="16" height="88" rx="2" fill="currentColor"/><rect x="80" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="100" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="120" y="0" width="16" height="128" rx="2" fill="currentColor"/></g></svg></span>
+      <span class="brand-text">
+        <span class="brand-mark">WalPanel</span>
+        <span class="brand-sub">Inc.</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="boards.html">Cladding</a></li>
+      <li><a href="fence.html">Fence</a></li>
+      <li><a href="trims.html">Trims</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contractors.html">Contractors</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#tabs">Get in touch</a>
+  </div>
+</nav>
+
+<section class="page-head" style="padding-top:60px">
+  <div>
+    <span class="eyebrow">Get in touch</span>
+    <h1>By appointment,<br><em>any day.</em></h1>
+  </div>
+  <p>We don't keep retail hours — we work around your schedule. Pick a form below for what you need and we'll respond within one business day. For anything urgent, the chat at the bottom-right can also queue a sales callback in under a minute.</p>
+</section>
+
+<!-- TABS -->
+<div class="tabs" id="tabs">
+  <button class="tab active" data-tab="visit">Showroom visit</button>
+  <button class="tab" data-tab="quote">Project quote</button>
+  <button class="tab" data-tab="delivery">Delivery quote</button>
+  <button class="tab" data-tab="sample">Sample order</button>
+  <button class="tab" data-tab="install">Installation</button>
+  <button class="tab" data-tab="custom">Custom color</button>
+</div>
+
+<section class="two-col" style="padding-top:20px">
+
+  <div>
+    <!-- SHOWROOM VISIT FORM -->
+    <form class="form-card form-panel active" data-panel="visit" action="thank-you.html" method="get">
+      <h2>Book a showroom visit</h2>
+      <p class="form-sub">Showroom is by appointment only. Tell us when works and what you'd like to see.</p>
+      <div class="grid-2">
+        <label class="req">Name<input type="text" name="name" required></label>
+        <label class="req">Phone<input type="tel" name="phone" required></label>
+      </div>
+      <label>Email (optional)<input type="email" name="email"></label>
+      <div class="grid-2">
+        <label>Preferred day<input type="date" name="day"></label>
+        <label>Preferred time
+          <select name="time">
+            <option>Morning (9am–12pm)</option>
+            <option>Afternoon (12pm–5pm)</option>
+            <option>Evening (5pm–8pm)</option>
+            <option>Weekend</option>
+          </select>
+        </label>
+      </div>
+      <label>What are you interested in?
+        <select name="interest" multiple size="4">
+          <option>Cladding boards</option>
+          <option>Fence kits</option>
+          <option>L-Corner trim</option>
+          <option>General — just browsing</option>
+        </select>
+      </label>
+      <label>Notes<textarea name="notes" placeholder="Bringing a contractor? Working on a specific project? Tell us anything that helps us prepare."></textarea></label>
+      <button type="submit">Request appointment</button>
+    </form>
+
+    <!-- PROJECT QUOTE FORM -->
+    <form class="form-card form-panel" data-panel="quote" action="thank-you.html" method="get">
+      <h2>Project quote</h2>
+      <p class="form-sub">Send your project scope and we'll come back with a written quote — usually within one business day.</p>
+      <div class="grid-2">
+        <label class="req">Name<input type="text" name="name" required></label>
+        <label class="req">Phone<input type="tel" name="phone" required></label>
+      </div>
+      <div class="grid-2">
+        <label>Email<input type="email" name="email"></label>
+        <label>Company (if any)<input type="text" name="company"></label>
+      </div>
+      <label>Project type
+        <select name="project-type">
+          <option>Wall cladding — residential</option>
+          <option>Wall cladding — commercial</option>
+          <option>Fence — residential</option>
+          <option>Fence — commercial</option>
+          <option>Mixed / multiple</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>Estimated quantity or area<input type="text" name="qty" placeholder="e.g. 240 sq ft / 30 boards / 60 ft of fence"></label>
+      <label>Preferred color(s)<input type="text" name="color" placeholder="e.g. Teak, Black"></label>
+      <label>Project location (zip)<input type="text" name="zip"></label>
+      <label>Project details<textarea name="details" placeholder="Dimensions, deadline, complications — anything that helps us quote accurately"></textarea></label>
+      <button type="submit">Request quote</button>
+    </form>
+
+    <!-- DELIVERY QUOTE -->
+    <form class="form-card form-panel" data-panel="delivery" action="thank-you.html" method="get">
+      <h2>Delivery quote</h2>
+      <p class="form-sub">Local delivery is $150–$500 within ~60 miles, quoted per job. Give us the details below and a delivery partner will quote within 1 business day.</p>
+      <div class="grid-2">
+        <label class="req">Name<input type="text" name="name" required></label>
+        <label class="req">Phone<input type="tel" name="phone" required></label>
+      </div>
+      <label>Email (optional)<input type="email" name="email"></label>
+      <label class="req">Delivery address<input type="text" name="address" required placeholder="Street, city, state, zip"></label>
+      <label class="req">Product &amp; quantity<input type="text" name="product" required placeholder="e.g. 50 × 108&quot; Black cladding boards"></label>
+      <label class="req">Delivery timeframe
+        <select name="timeframe" required>
+          <option value="">Choose…</option>
+          <option>This week</option>
+          <option>Next week</option>
+          <option>In 2–4 weeks</option>
+          <option>Flexible</option>
+        </select>
+      </label>
+      <label>Site notes<textarea name="notes" placeholder="Access info, lift gate needed, weight limits, drop-off instructions"></textarea></label>
+      <button type="submit">Request delivery quote</button>
+    </form>
+
+    <!-- SAMPLE ORDER -->
+    <form class="form-card form-panel" data-panel="sample" action="thank-you.html" method="get">
+      <h2>Sample order</h2>
+      <p class="form-sub">Samples are $15 refundable deposit for showroom pickup, or $20 non-refundable for mail/ship. Tell us which colors and we'll have them ready.</p>
+      <div class="grid-2">
+        <label class="req">Name<input type="text" name="name" required></label>
+        <label class="req">Phone<input type="tel" name="phone" required></label>
+      </div>
+      <label>Email<input type="email" name="email"></label>
+      <label class="req">Sample method
+        <select name="method" required>
+          <option value="">Choose…</option>
+          <option>Pickup — $15 refundable deposit</option>
+          <option>Mail — $20 non-refundable</option>
+        </select>
+      </label>
+      <label class="req">Which colors? (up to 4)
+        <input type="text" name="colors" required placeholder="e.g. Teak, Dark Teak, Black, SPG">
+      </label>
+      <label>Mailing address (if shipping)
+        <textarea name="mail-addr" placeholder="Street, city, state, zip"></textarea>
+      </label>
+      <label>Notes<textarea name="notes"></textarea></label>
+      <button type="submit">Request samples</button>
+    </form>
+
+    <!-- INSTALL QUOTE -->
+    <form class="form-card form-panel" data-panel="install" action="thank-you.html" method="get">
+      <h2>Installation quote</h2>
+      <p class="form-sub">We offer installation by quote. We recommend visiting the showroom first so you can see and approve the product hands-on before scheduling install.</p>
+      <div class="grid-2">
+        <label class="req">Name<input type="text" name="name" required></label>
+        <label class="req">Phone<input type="tel" name="phone" required></label>
+      </div>
+      <label>Email<input type="email" name="email"></label>
+      <label>Install location (zip + general area)<input type="text" name="loc"></label>
+      <label>Install type
+        <select name="type">
+          <option>Wall cladding</option>
+          <option>Fence</option>
+          <option>Both</option>
+        </select>
+      </label>
+      <label>Project size<input type="text" name="size" placeholder="e.g. 180 sq ft wall, 40 ft fence, single bay"></label>
+      <label>Have you visited the showroom? <select name="visited"><option>Not yet</option><option>Yes</option></select></label>
+      <label>Project details<textarea name="details"></textarea></label>
+      <button type="submit">Request install quote</button>
+    </form>
+
+    <!-- CUSTOM COLOR -->
+    <form class="form-card form-panel" data-panel="custom" action="thank-you.html" method="get">
+      <h2>Custom color order</h2>
+      <p class="form-sub">For colors we don't stock, we can source through drop ship or special order. Terms depend on the color, quantity, and timeline — tell us what you need and we'll come back with specifics. Custom orders are typically pre-paid via Zelle.</p>
+      <div class="grid-2">
+        <label class="req">Name<input type="text" name="name" required></label>
+        <label class="req">Phone<input type="tel" name="phone" required></label>
+      </div>
+      <label>Email<input type="email" name="email"></label>
+      <label>Product
+        <select name="product">
+          <option>Cladding boards (100 pc min)</option>
+          <option>Fence kits (50 set min)</option>
+        </select>
+      </label>
+      <label>Desired color description<textarea name="color" placeholder="Color name, reference, or photo description (you can also email a reference photo after submitting)"></textarea></label>
+      <label>Quantity<input type="text" name="qty"></label>
+      <label>Notes<textarea name="notes"></textarea></label>
+      <button type="submit">Request custom quote</button>
+    </form>
+  </div>
+
+  <aside class="side-info">
+    <span class="eyebrow">Where to find us</span>
+    <h3>Showroom</h3>
+    <dl>
+      <dt>Address</dt><dd>21350 Lassen St<br>Chatsworth, CA 91311<br>(ReadySpaces)</dd>
+      <dt>Hours</dt><dd>By appointment only</dd>
+      <dt>Payment</dt><dd>Zelle or cash · 9.75% tax added at checkout</dd>
+      <dt>Inspect</dt><dd>Please inspect product at pickup or delivery before signing off.</dd>
+    </dl>
+
+    <h3>What's next</h3>
+    <p style="font-size:.92rem;color:var(--ink-soft);line-height:1.6;">
+      Submissions go straight to our sales team. We respond within 1 business day at the phone number you provide, with the email as backup.
+    </p>
+
+    <h3>Need to talk now?</h3>
+    <p style="font-size:.92rem;color:var(--ink-soft);line-height:1.6;">
+      The chat at the bottom-right can answer most pricing, color, and delivery questions immediately — and queue a callback if needed.
+    </p>
+  </aside>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="footer-brand-logo" aria-hidden="true"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(28, 36)"><rect x="0" y="0" width="16" height="128" rx="2" fill="currentColor"/><rect x="20" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="40" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="60" y="40" width="16" height="88" rx="2" fill="currentColor"/><rect x="80" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="100" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="120" y="0" width="16" height="128" rx="2" fill="currentColor"/></g></svg></span><span>WalPanel Inc.</span></div>
+      <p class="footer-tag">Architectural WPC cladding and fence panels at factory-direct pricing. Serving Los Angeles and surrounding markets.</p>
+    </div>
+    <div>
+      <h4>Products</h4>
+      <ul>
+        <li><a href="boards.html">Cladding boards</a></li>
+        <li><a href="fence.html">Fence kits</a></li>
+        <li><a href="trims.html">L-Corners &amp; trim</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="gallery.html">Project gallery</a></li>
+        <li><a href="contractors.html">Contractor program</a></li>
+        <li><a href="docs/pricing-book.pdf">Pricing book (PDF)</a></li>
+        <li><a href="docs/fence-install.pdf">Fence install guide</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li>21350 Lassen St</li>
+        <li>Chatsworth, CA 91311</li>
+        <li>By appointment only</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 WalPanel Inc. · All rights reserved.</span>
+    <span><a href="terms.html" style="opacity:.7;color:rgba(245,241,234,.7)">Terms &amp; conditions</a> · CA sales tax 9.75% added at checkout.</span>
+  </div>
+</footer>
+
+<button class="chat-bubble" id="chat-bubble" aria-label="Open chat">
+  <span class="chat-bubble-dot"></span>
+  Chat with us
+</button>
+<div class="chat-window" id="chat-window" role="dialog" aria-label="Chat with WalPanel">
+  <div class="chat-header">
+    <div class="chat-header-title">
+      <strong>WalPanel Chat</strong>
+      <span>Online · usually replies instantly</span>
+    </div>
+    <button class="chat-close" id="chat-close" aria-label="Close chat">×</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="msg msg-bot">Hi! I can answer quick questions, or help you figure out which contact form to use. What's on your mind?</div>
+  </div>
+  <div class="quick-replies" id="quick-replies">
+    <button class="quick-reply">What's the price?</button>
+    <button class="quick-reply">Do you deliver?</button>
+    <button class="quick-reply">Talk to sales</button>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chat-input" placeholder="Type a message…" autocomplete="off">
+    <button class="chat-send" id="chat-send">Send</button>
+  </div>
+</div>
+
+<script>
+  // Tab switching + deep linking via ?type=
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.form-panel');
+  function activate(name){
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    panels.forEach(p => p.classList.toggle('active', p.dataset.panel === name));
+  }
+  tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.tab)));
+  // Deep link: ?type=quote etc
+  const params = new URLSearchParams(location.search);
+  const type = params.get('type');
+  const map = {'quote':'quote','fence-quote':'quote','delivery':'delivery','sample':'sample','install':'install','custom':'custom','visit':'visit'};
+  if (type && map[type]) activate(map[type]);
+</script>
+<script src="js/chat.js"></script>
+</body>
+</html>
