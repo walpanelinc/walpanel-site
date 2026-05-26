@@ -25,8 +25,7 @@
 html{scroll-behavior:smooth}
 body{
   font-family:'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-feature-settings: 'kern' 1;
-  font-variant-ligatures: no-discretionary-ligatures no-historical-ligatures no-contextual;
+  font-feature-settings:'ss01','cv11';
   background:var(--paper);
   color:var(--ink);
   line-height:1.55;
@@ -50,9 +49,6 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
   font-weight:400;
   letter-spacing:-.02em;
   line-height:1;
-  font-variant-ligatures: none;
-  font-variant-alternates: normal;
-  font-feature-settings: 'kern' 1, 'liga' 0, 'clig' 0, 'dlig' 0, 'hlig' 0, 'calt' 0, 'salt' 0, 'ss01' 0, 'ss02' 0, 'ss03' 0, 'ss04' 0, 'ss05' 0, 'cv01' 0, 'cv02' 0, 'cv03' 0, 'cv04' 0, 'cv05' 0, 'cv06' 0, 'cv07' 0, 'cv08' 0, 'cv09' 0, 'cv10' 0, 'cv11' 0;
 }
 
 .eyebrow{
