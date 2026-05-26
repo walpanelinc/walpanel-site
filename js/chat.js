@@ -265,20 +265,34 @@ function initChat(){
         alert('Please enter your name and phone number.');
         return;
       }
-      // === In production: POST this to your CRM / email endpoint ===
       const lead = {
         name,
         phone,
         email: document.getElementById('lf-email').value.trim(),
-        time: document.getElementById('lf-time').value,
-        project: document.getElementById('lf-project').value,
-        qty: document.getElementById('lf-qty').value.trim(),
-        timestamp: new Date().toISOString(),
-        source: 'Instant chat'
+        preferred_call_time: document.getElementById('lf-time').value,
+        project_type: document.getElementById('lf-project').value,
+        quantity_estimate: document.getElementById('lf-qty').value.trim(),
+        form_source: 'Instant chat',
+        _subject: 'New lead — Instant chat',
+        timestamp: new Date().toISOString()
       };
-      console.log('LEAD CAPTURED:', lead);
+
+      // POST to Formspree
+      fetch('https://formspree.io/f/xpqnoajd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(lead)
+      }).then(res => {
+        if (!res.ok) console.error('Lead submission failed:', res.status);
+      }).catch(err => {
+        console.error('Lead submission error:', err);
+      });
+
       wrap.innerHTML = `<div class="lead-form-title">Thanks, ${name}!</div>
-        <div class="lead-form-sub">Our sales team will call you ${lead.time ? 'in the ' + lead.time.toLowerCase() : 'soon'} at ${phone}. In the meantime, feel free to ask me anything else.</div>`;
+        <div class="lead-form-sub">Our sales team will call you ${lead.preferred_call_time ? 'in the ' + lead.preferred_call_time.toLowerCase() : 'soon'} at ${phone}. In the meantime, feel free to ask me anything else.</div>`;
     });
   }
 
