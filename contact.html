@@ -42,6 +42,9 @@
       <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
     <a class="nav-cta" href="#tabs">Get in touch</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -198,7 +201,7 @@
       <input type="hidden" name="form_source" value="Installation quote">
       <input type="hidden" name="_next" value="https://walpanel-site.walpanelsales.workers.dev/thank-you.html">
       <h2>Installation quote</h2>
-      <p class="form-sub">We offer installation by quote. We recommend visiting the showroom first so you can see and approve the product hands-on before scheduling install.</p>
+      <p class="form-sub">We work with a trusted installation partner, or you're welcome to use your own contractor — you can also browse our <a href="find-a-pro.html" style="color:var(--amber-deep);text-decoration:underline">WalPanel Pros</a>. Tell us about your project and we'll connect you with the right installer. We recommend visiting the showroom first so you can see and approve the product hands-on.</p>
       <div class="grid-2">
         <label class="req">Name<input type="text" name="name" required></label>
         <label class="req">Phone<input type="tel" name="phone" required></label>
@@ -228,7 +231,7 @@
       <input type="hidden" name="form_source" value="Custom color">
       <input type="hidden" name="_next" value="https://walpanel-site.walpanelsales.workers.dev/thank-you.html">
       <h2>Custom color order</h2>
-      <p class="form-sub">For colors we don't stock, we can source through drop ship or special order. Terms depend on the color, quantity, and timeline — tell us what you need and we'll come back with specifics. Custom orders are typically pre-paid via Zelle.</p>
+      <p class="form-sub">For colors we don't stock, we can source through drop ship or special order. There's no special minimum beyond our standard order minimum (15 boards / 5 fence kits) for pickup or delivery — direct drop ship from the factory starts at 100 boards or 50 fence sets. Terms depend on the color, quantity, and timeline; tell us what you need and we'll come back with specifics. Custom orders are typically pre-paid via Zelle.</p>
       <div class="grid-2">
         <label class="req">Name<input type="text" name="name" required></label>
         <label class="req">Phone<input type="tel" name="phone" required></label>
@@ -352,5 +355,25 @@
   if (type && map[type]) activate(map[type]);
 </script>
 <script src="js/chat.js"></script>
+<script>
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var menu = document.querySelector('.nav-links');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  // Close menu when a link is tapped
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-label','Open menu');
+    });
+  });
+})();
+</script>
 </body>
 </html>

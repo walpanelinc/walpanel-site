@@ -32,6 +32,9 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <a class="nav-cta" href="contact.html">Visit Showroom</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -304,5 +307,25 @@
 </div>
 
 <script src="js/chat.js"></script>
+<script>
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var menu = document.querySelector('.nav-links');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  // Close menu when a link is tapped
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-label','Open menu');
+    });
+  });
+})();
+</script>
 </body>
 </html>

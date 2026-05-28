@@ -68,6 +68,9 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <a class="nav-cta" href="contact.html">Visit Showroom</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -82,7 +85,7 @@
   <p>All prices displayed on our website are exclusive of California sales tax (9.75% for the 91311 zip code), which is added at checkout. Pricing is subject to change without notice unless payment has been remitted at the time of order. We accept Zelle and cash only — no credit cards, checks, or other payment methods.</p>
 
   <h2>2. Minimum order</h2>
-  <p>Minimum order quantities apply: 15 pieces for cladding boards, 5 sets for fence kits. Custom-color orders ship from our overseas factory with a minimum of 100 pieces (boards) or 50 sets (fence kits) and a lead time of approximately 6 weeks. Custom orders are pre-paid in full at the time of order.</p>
+  <p>Minimum order quantities apply: 15 pieces for cladding boards, 5 sets for fence kits. Non-stock (custom) colors are available through special order or direct factory drop ship. For pickup or delivery there is no minimum beyond the standard order minimum; direct drop-ship orders start at 100 pieces (boards) or 50 sets (fence kits). Lead times vary by color and quantity — typically a few weeks. Custom orders are pre-paid in full at the time of order.</p>
 
   <h2>3. Pickup, delivery &amp; inspection</h2>
   <p>Most orders are local pickup at our Chatsworth showroom (21350 Lassen St, Chatsworth, CA 91311), by appointment. Local delivery is available within approximately 60 miles for an additional fee of $150–$500, quoted per job through our delivery partners.</p>
@@ -150,5 +153,25 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var menu = document.querySelector('.nav-links');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  // Close menu when a link is tapped
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-label','Open menu');
+    });
+  });
+})();
+</script>
 </body>
 </html>

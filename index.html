@@ -72,6 +72,9 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <a class="nav-cta" href="contact.html">Visit Showroom</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -167,12 +170,12 @@
 <section class="section" style="padding-top:0">
   <div class="section-head">
     <div>
-      <span class="eyebrow">Installed across SoCal</span>
+      <span class="eyebrow">Cladding &amp; fence in use</span>
       <h2>Seen in the <em>wild.</em></h2>
     </div>
-    <p class="section-lead">From full home facades to backyard privacy fences — here's our WPC on real Southern California projects. <a href="gallery.html" style="color:var(--amber-deep);text-decoration:underline">See the full gallery →</a></p>
+    <p class="section-lead">From full home facades to backyard privacy fences — a look at what WPC cladding and fencing can do. <a href="gallery.html" style="color:var(--amber-deep);text-decoration:underline">See the full gallery →</a></p>
   </div>
-  <div class="gallery">
+  <div class="gallery gallery-wild">
     <figure class="g-3">
       <img src="images/projects/project-teak-garage-facade.jpg" alt="Teak WPC cladding facade">
       <figcaption>Teak facade · modern home</figcaption>
@@ -222,7 +225,7 @@
     <div class="value">
       <div class="value-num">01</div>
       <h3>Stocked locally</h3>
-      <p>We import architectural-grade WPC directly and hold inventory in Chatsworth — so you skip the overseas wait and the distributor markup. Tell us your project size and we'll quote you accordingly.</p>
+      <p>We source architectural-grade WPC and keep inventory in our Chatsworth warehouse — so you skip the long lead times and the distributor markup. Tell us your project size and we'll quote you accordingly.</p>
     </div>
     <div class="value">
       <div class="value-num">02</div>
@@ -331,5 +334,25 @@
 </div>
 
 <script src="js/chat.js"></script>
+<script>
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var menu = document.querySelector('.nav-links');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  // Close menu when a link is tapped
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-label','Open menu');
+    });
+  });
+})();
+</script>
 </body>
 </html>

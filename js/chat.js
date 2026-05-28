@@ -136,7 +136,7 @@ function botReply(intent, raw){
     case 'ground':
       return `Our fence system is <strong>surface-mount</strong> — the posts attach to a solid surface like a concrete footing or slab, and aren't designed to be buried directly in the ground. This actually helps the product last longer, since direct soil contact is hard on any composite. A <a href="find-a-pro.html" style="color:var(--amber-deep);text-decoration:underline">WalPanel Pro</a> can help with proper footings if you need it. Anything else?`;
     case 'install':
-      return `Boards mount to a solid substrate (plywood, furring strips, or studs) with expansion gaps — installers use their own preferred screws, since we don't supply fasteners. Fence posts are <strong>surface-mount</strong> (they aren't buried in the ground). We have a step-by-step PDF for fence on the Fence page; there isn't a published cladding guide yet, so for cladding specifics reach out to sales. We don't install directly, but we can connect you with a <a href="find-a-pro.html" style="color:var(--amber-deep);text-decoration:underline">WalPanel Pro installer</a> in Southern California. Want an intro?`;
+      return `Boards mount to a solid substrate (plywood, furring strips, or studs) with expansion gaps — installers use their own preferred screws, since we don't supply fasteners. Fence posts are <strong>surface-mount</strong> (they aren't buried in the ground). We have a step-by-step PDF for fence on the Fence page; there isn't a published cladding guide yet, so for cladding specifics reach out to sales. For install, we work with a trusted partner, or you can use your own contractor or a <a href="find-a-pro.html" style="color:var(--amber-deep);text-decoration:underline">WalPanel Pro</a>. Want an intro?`;
     case 'fence':
       return `Our fence kits are <strong>6 ft × 6 ft sets at $248</strong>, in Black or Brown. Each set includes 9 panels, 1 post, top/bottom covers, base, cap, corner brackets, and the hardware to install. For longer runs, you only need one extra post per additional bay — $90 each — not another full set. Minimum order: 5 sets.`;
     case 'boards':
@@ -154,7 +154,7 @@ function botReply(intent, raw){
     case 'payment':
       return `We accept <strong>Zelle or cash only</strong>. No cards, no checks. CA sales tax (9.75%) is added at checkout.`;
     case 'custom':
-      return `For colors we don't stock, we can usually source through drop ship or special order — terms depend on the color, quantity, and timeline. Tell me what color you're after and roughly how much you need, and I'll get sales to put together specifics for you.`;
+      return `For colors we don't stock, we can source through drop ship or special order. There's no special minimum beyond our standard order minimum (15 boards / 5 fence kits) for pickup or delivery — direct factory drop ship starts at 100 boards or 50 fence sets. Terms depend on the color, quantity, and timeline. Tell me what color you're after and roughly how much you need, and I'll get sales to put together specifics for you.`;
     case 'qty':
       // Pull a quantity hint from the user message
       const qtyMatch = raw.match(/(\d+)\s*(piece|pc|pcs|board|panel|set|sq\.?\s*ft|square feet|sqft|ft|foot|feet)/i);
