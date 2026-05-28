@@ -36,9 +36,9 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="boards.html">Cladding</a></li>
       <li><a href="fence.html">Fence</a></li>
-      <li><a href="trims.html">Trims</a></li>
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="contractors.html">Contractors</a></li>
+      <li><a href="find-a-pro.html">Find a Pro</a></li>
       <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
     <a class="nav-cta" href="#tabs">Get in touch</a>
@@ -93,7 +93,6 @@
         <select name="interest" multiple size="4">
           <option>Cladding boards</option>
           <option>Fence kits</option>
-          <option>L-Corner trim</option>
           <option>General — just browsing</option>
         </select>
       </label>
@@ -128,8 +127,12 @@
       </label>
       <label>Estimated quantity or area<input type="text" name="qty" placeholder="e.g. 240 sq ft / 30 boards / 60 ft of fence"></label>
       <label>Preferred color(s)<input type="text" name="color" placeholder="e.g. Teak, Black"></label>
-      <label>Project location (zip)<input type="text" name="zip"></label>
+      <label>Project location (address)<input type="text" name="zip" placeholder="Street address — or zip if that's all you have"></label>
       <label>Project details<textarea name="details" placeholder="Dimensions, deadline, complications — anything that helps us quote accurately"></textarea></label>
+      <label class="photo-optin">
+        <input type="checkbox" name="wants_photo_link" value="yes">
+        <span>I have site photos or a color to match — text me a link to send them</span>
+      </label>
       <button type="submit">Request quote</button>
     </form>
 
@@ -201,7 +204,7 @@
         <label class="req">Phone<input type="tel" name="phone" required></label>
       </div>
       <label>Email<input type="email" name="email"></label>
-      <label>Install location (zip + general area)<input type="text" name="loc"></label>
+      <label>Install location (address)<input type="text" name="loc" placeholder="Street address — or zip if that's all you have"></label>
       <label>Install type
         <select name="type">
           <option>Wall cladding</option>
@@ -212,6 +215,10 @@
       <label>Project size<input type="text" name="size" placeholder="e.g. 180 sq ft wall, 40 ft fence, single bay"></label>
       <label>Have you visited the showroom? <select name="visited"><option>Not yet</option><option>Yes</option></select></label>
       <label>Project details<textarea name="details"></textarea></label>
+      <label class="photo-optin">
+        <input type="checkbox" name="wants_photo_link" value="yes">
+        <span>I have site photos — text me a link to send them</span>
+      </label>
       <button type="submit">Request install quote</button>
     </form>
 
@@ -229,13 +236,17 @@
       <label>Email<input type="email" name="email"></label>
       <label>Product
         <select name="product">
-          <option>Cladding boards (100 pc min)</option>
-          <option>Fence kits (50 set min)</option>
+          <option>Cladding boards</option>
+          <option>Fence kits</option>
         </select>
       </label>
-      <label>Desired color description<textarea name="color" placeholder="Color name, reference, or photo description (you can also email a reference photo after submitting)"></textarea></label>
+      <label>Desired color description<textarea name="color" placeholder="Color name, reference, or description of the look you're after"></textarea></label>
       <label>Quantity<input type="text" name="qty"></label>
       <label>Notes<textarea name="notes"></textarea></label>
+      <label class="photo-optin">
+        <input type="checkbox" name="wants_photo_link" value="yes">
+        <span>I have a color reference to match — text me a link to send a photo</span>
+      </label>
       <button type="submit">Request custom quote</button>
     </form>
   </div>
@@ -250,12 +261,12 @@
       <dt>Inspect</dt><dd>Please inspect product at pickup or delivery before signing off.</dd>
     </dl>
 
-    <h3>What's next</h3>
+    <h3 style="margin-top:32px;">What's next</h3>
     <p style="font-size:.92rem;color:var(--ink-soft);line-height:1.6;">
       Submissions go straight to our sales team. We respond within 1 business day at the phone number you provide, with the email as backup.
     </p>
 
-    <h3>Need to talk now?</h3>
+    <h3 style="margin-top:32px;">Need to talk now?</h3>
     <p style="font-size:.92rem;color:var(--ink-soft);line-height:1.6;">
       The chat at the bottom-right can answer most pricing, color, and delivery questions immediately — and queue a callback if needed.
     </p>
@@ -266,14 +277,14 @@
   <div class="footer-inner">
     <div>
       <div class="footer-brand"><span class="footer-brand-logo" aria-hidden="true"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(28, 36)"><rect x="0" y="0" width="16" height="128" rx="2" fill="currentColor"/><rect x="20" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="40" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="60" y="40" width="16" height="88" rx="2" fill="currentColor"/><rect x="80" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="100" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="120" y="0" width="16" height="128" rx="2" fill="currentColor"/></g></svg></span><span>WalPanel Inc.</span></div>
-      <p class="footer-tag">Architectural WPC cladding and fence panels at factory-direct pricing. Serving Los Angeles and surrounding markets.</p>
+      <p class="footer-tag">Architectural WPC cladding and modular fence panels, stocked at our Chatsworth showroom. Serving Los Angeles and surrounding markets.</p>
     </div>
     <div>
       <h4>Products</h4>
       <ul>
         <li><a href="boards.html">Cladding boards</a></li>
         <li><a href="fence.html">Fence kits</a></li>
-        <li><a href="trims.html">L-Corners &amp; trim</a></li>
+        <li><a href="boards.html#trims">L-Corners &amp; trim</a></li>
       </ul>
     </div>
     <div>
@@ -281,7 +292,6 @@
       <ul>
         <li><a href="gallery.html">Project gallery</a></li>
         <li><a href="contractors.html">Contractor program</a></li>
-        <li><a href="docs/pricing-book.pdf">Pricing book (PDF)</a></li>
         <li><a href="docs/fence-install.pdf">Fence install guide</a></li>
       </ul>
     </div>
@@ -295,7 +305,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 WalPanel Inc. · All rights reserved.</span>
+    <span>© 2026 WalPanel Inc. · Part of <a href="https://wallshell.com" style="color:rgba(245,241,234,.7);opacity:.7" target="_blank" rel="noopener">Walpanel Inc.</a>, est. 2002 · All rights reserved.</span>
     <span><a href="terms.html" style="opacity:.7;color:rgba(245,241,234,.7)">Terms &amp; conditions</a> · CA sales tax 9.75% added at checkout.</span>
   </div>
 </footer>

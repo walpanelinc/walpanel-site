@@ -23,24 +23,26 @@ const FACTS = {
       { id: 'HLC-4929', dim: '8-5/8" × 1" × 114"', coverage: '8" × 114" effective (after overlap)', sqft: 6.33, priceTaxIn: 40.80, pricePreTax: 37.18 }
     ],
     colors: ['Black', 'Dark Teak', 'Dark Teak w/ Black Base', 'SPG w/ Black Base', 'Teak', 'Teak w/ Black Base', 'Teak (Wood Grain)'],
-    use: 'Outdoor only',
-    warranty: 'No express written warranty. WPC composite is engineered for outdoor durability. (Internal: do not promise specific years; defer to T&Cs for legal language.)',
-    origin: 'Imported',
+    capCoverage: 'The UV-resistant protective shell (cap) is on the visible show face of the board.',
+    use: 'Outdoor only — not rated for interior installation.',
+    warranty: 'No express written warranty. Defective-on-arrival product is replaced — customers inspect at pickup/delivery. WPC composite is engineered for outdoor durability. (Internal: do not promise specific years; defer to T&Cs.)',
     minOrder: 15,
     discounts: [
-      { min: 1, max: 30, pct: 10 },
-      { min: 31, max: 50, pct: 15 },
-      { min: 51, max: 100, pct: 20 }
+      { min: 30, pct: 10 },
+      { min: 50, pct: 15 },
+      { min: 100, pct: 20 }
     ],
-    customColorMin: 100,
-    customColorLeadTime: '~6 weeks',
-    fasteners: 'Customer-supplied (installers use their own preferred fasteners)'
+    customColorLeadTime: 'a few weeks (varies by color and quantity)',
+    customColorNote: 'Non-stock colors available via drop ship or special order. No fixed public minimum — depends on color, quantity, and timeline.',
+    installGuide: 'No cladding install guide currently published. Cladding is screw-fixed to a solid substrate or battens with expansion gaps. For specifics, contact sales or work with a WalPanel Pro installer.',
+    fasteners: 'Fasteners not supplied — installers use their own preferred screws.'
   },
   trims: {
-    name: 'L-Corner CPJ-06',
-    sizes: [
-      { dim: '2" × 2" × 108"', pricePreTax: 18.00, priceTaxIn: 19.76 },
-      { dim: '2" × 2" × 114"', pricePreTax: 20.00, priceTaxIn: 21.95 }
+    note: 'Cladding finishing accessories — sold with cladding orders, not separately. Color-matched to HLC-49: Black, Dark Teak, SPG, Teak. Available in 108" and 114" lengths.',
+    types: [
+      { name: 'L-Corner', use: 'inside & outside corners', price108: 18.00, price114: 20.00 },
+      { name: 'Outside Corner', use: 'wraps external corners', price108: 26.00, price114: 28.00 },
+      { name: 'End Trim', use: 'finishes board ends & edges', price108: 26.00, price114: 28.00 }
     ],
     colors: ['Black', 'Dark Teak', 'SPG', 'Teak']
   },
@@ -52,21 +54,28 @@ const FACTS = {
     priceTaxIn: 272.18,
     extraPostPreTax: 90.00,
     extraPostTaxIn: 98.78,
-    setContents: 'Each kit includes 9 panels, 1 aluminum post, 2 top/bottom covers, 1 base, 1 cap, 4 corner brackets, and the hardware needed for install. Drill-tail screws are available on request — most installers prefer to use their own.',
+    setContents: 'Each kit includes 9 panels, 1 aluminum post, 2 top/bottom covers, 1 base, 1 cap, 4 corner brackets, and the hardware needed for install.',
+    mounting: 'Surface-mount only. Posts mount to a solid surface (concrete, footing, etc.) — they are not designed to be buried directly in the ground.',
     colors: ['Black', 'Brown'],
     minOrder: 5,
-    customColorMin: 50,
-    customColorLeadTime: '~6 weeks',
+    customColorLeadTime: 'a few weeks (varies by color and quantity)',
     addBay: 'Each additional bay needs only one extra post ($90 each) — no extra full set required.'
   },
   logistics: {
     pickup: 'Same-day or next-day pickup when product is in stock, by appointment',
-    delivery: 'Local delivery available — $150–$500 within ~60 miles, quote per job (address, product, quantity, time frame required)',
-    install: 'Installation available by quote. We recommend visiting the showroom first so you can evaluate the product hands-on.',
+    delivery: 'Local delivery within ~60 miles, quoted per job by distance and order size: roughly $150–250 within 20 miles, $250–400 at 20–40 miles, $400–650 at 40–60 miles. Beyond 60 miles is a custom quote up to ~$1,000.',
+    deliveryMatrix: {
+      '0-20mi': { small: 150, medium: 200, large: 250 },
+      '20-40mi': { small: 250, medium: 325, large: 400 },
+      '40-60mi': { small: 400, medium: 525, large: 650 },
+      '60+mi': 'Custom quote, up to ~$1,000'
+    },
+    install: 'We don\'t install directly, but we can connect you with a WalPanel Pro installer in Southern California. Visit the showroom first to evaluate the product hands-on.',
     samples: 'Local pickup samples: $15 refundable deposit. Mail/shipped samples: $20 non-refundable.',
-    returns: 'Returns not accepted after acceptance. Customers inspect product at pickup or delivery before signing off. Defer customers to terms.html for full language.',
-    damage: 'Customers must inspect product at pickup. No later damage claims accepted after pickup.',
-    contractor: 'Contractor discount available. Apply with a copy of your contractor license or business card; tier set per industry standard plus our volume program. Referral bonuses available.'
+    returns: 'Returns not accepted after acceptance. Customers inspect product at pickup or delivery before signing off. Defective-on-arrival items are replaced. Full language in terms.html.',
+    damage: 'Customers inspect product at pickup/delivery. Defective-on-arrival is replaced; no later damage claims after acceptance.',
+    contractor: 'WalPanel Pros trade program: trade pricing, same-day quotes, $50 referral bonus (new customer, $500+ order), and 2–3% quarterly cash back at Pro/Elite tiers. License or business card helps but isn\'t required to apply.',
+    language: 'English'
   },
   forbidden: [
     'lifetime warranty',
@@ -81,22 +90,25 @@ const FACTS = {
 function classify(text){
   const t = text.toLowerCase();
   if (/^(hi|hello|hey|yo|sup|good (morning|afternoon|evening))\b/.test(t)) return 'greet';
+  if (/(contractor|trade|bulk|wholesale|installer)/.test(t)) return 'contractor';
+  // If the message contains a quantity, prioritize the quantity quote (with volume discount) over the generic price list
+  if (/(\d+)\s*(piece|pc|pcs|board|panel|sq|square feet|sqft|sq\.? ?ft|set|foot|feet|ft)/.test(t)) return 'qty';
   if (/(price|cost|how much|quote|pricing)/.test(t)) return 'price';
   if (/(color|colour|swatch|finish)/.test(t)) return 'color';
   if (/(deliver|shipping|ship)/.test(t)) return 'delivery';
   if (/(pickup|pick up|warehouse|showroom|address|location|where)/.test(t)) return 'location';
-  if (/(install|tools|fastener|screw|how do i)/.test(t)) return 'install';
+  if (/(indoor|inside|interior|accent wall|living room|bedroom)/.test(t)) return 'indoor';
+  if (/(ground|bury|buried|in[\s-]?ground|soil|dig|concrete footing|post hole)/.test(t)) return 'ground';
+  if (/(install|tools|fastener|screw|how do i|mount)/.test(t)) return 'install';
   if (/(fence|panel kit|gate|post)/.test(t)) return 'fence';
   if (/(board|cladding|wall panel|wpc)/.test(t)) return 'boards';
   if (/(trim|corner|l[\s-]?corner)/.test(t)) return 'trim';
   if (/(sample)/.test(t)) return 'sample';
   if (/(return|refund|damage|defect)/.test(t)) return 'returns';
   if (/(warranty|guarantee)/.test(t)) return 'warranty';
-  if (/(contractor|trade|bulk|wholesale)/.test(t)) return 'contractor';
   if (/(pay|payment|zelle|cash|card|credit)/.test(t)) return 'payment';
   if (/(custom|special order|specific color)/.test(t)) return 'custom';
   if (/(call|speak|talk|sales|human|person|agent)/.test(t)) return 'handoff';
-  if (/(\d+)\s*(piece|pc|pcs|board|panel|sq|square feet|sqft|sq\.? ?ft|set)/.test(t)) return 'qty';
   return 'unknown';
 }
 
@@ -116,25 +128,29 @@ function botReply(intent, raw){
     case 'color':
       return `<strong>Boards (HLC-49) in stock</strong>: Black · Dark Teak · Dark Teak w/ Black Base · SPG w/ Black Base · Teak · Teak w/ Black Base · Teak (Wood Grain). <strong>Fence kits</strong>: Black or Brown. Need something different? We can source additional colors via drop ship or special order — happy to walk through what's possible for your project. What color are you looking for?`;
     case 'delivery':
-      return `Most orders are local pickup at our Chatsworth showroom. We do offer delivery for an additional $150–$500 within roughly 60 miles, quoted per job. To get a delivery quote we'd need your address, the product and quantity, and your preferred timeframe. Want me to set you up with a sales callback?`;
+      return `Most orders are local pickup at our Chatsworth showroom, but we deliver within about 60 miles. Cost depends on distance and order size — roughly <strong>$150–250 within 20 miles</strong>, <strong>$250–400 at 20–40 miles</strong>, and <strong>$400–650 at 40–60 miles</strong>. Beyond that we'll do a custom quote. If you tell me your city and rough order size I can ballpark it, or set up a sales callback for an exact number.`;
     case 'location':
       return `Our showroom is at <strong>21350 Lassen St, Chatsworth, CA 91311</strong> (inside ReadySpaces). We're by appointment only — no fixed hours. I can grab your number and have sales schedule a visit. Want me to do that?`;
+    case 'indoor':
+      return `Our WPC cladding is rated for <strong>outdoor use</strong> — it's built for exterior walls, facades, and fences. We don't market it for interior installation, so if you're planning an indoor accent wall I'd suggest checking with sales first about whether it fits your specific situation. Want me to connect you?`;
+    case 'ground':
+      return `Our fence system is <strong>surface-mount</strong> — the posts attach to a solid surface like a concrete footing or slab, and aren't designed to be buried directly in the ground. This actually helps the product last longer, since direct soil contact is hard on any composite. A <a href="find-a-pro.html" style="color:var(--amber-deep);text-decoration:underline">WalPanel Pro</a> can help with proper footings if you need it. Anything else?`;
     case 'install':
-      return `Boards mount to plywood, furring strips, or studs — most installers use their own preferred screws or fasteners (we don't sell hardware). For fence kits we have a step-by-step PDF guide on the Fence page. We also offer installation service by quote, though we recommend visiting the showroom first so you can see the product. Want install pricing?`;
+      return `Boards mount to a solid substrate (plywood, furring strips, or studs) with expansion gaps — installers use their own preferred screws, since we don't supply fasteners. Fence posts are <strong>surface-mount</strong> (they aren't buried in the ground). We have a step-by-step PDF for fence on the Fence page; there isn't a published cladding guide yet, so for cladding specifics reach out to sales. We don't install directly, but we can connect you with a <a href="find-a-pro.html" style="color:var(--amber-deep);text-decoration:underline">WalPanel Pro installer</a> in Southern California. Want an intro?`;
     case 'fence':
       return `Our fence kits are <strong>6 ft × 6 ft sets at $248</strong>, in Black or Brown. Each set includes 9 panels, 1 post, top/bottom covers, base, cap, corner brackets, and the hardware to install. For longer runs, you only need one extra post per additional bay — $90 each — not another full set. Minimum order: 5 sets.`;
     case 'boards':
       return `Our WPC cladding (HLC-49 series) is 8-5/8" wide × 1" deep, in 108" or 114" lengths, with a tough UV-resistant outer shell bonded to a structural core. After installation overlap, each board covers about 8 inches wide. <strong>$35.36 for 108"</strong>, $37.18 for 114". Outdoor use only. Want me to calculate boards for a specific wall?`;
     case 'trim':
-      return `We carry matching L-Corner trims (CPJ-06) at 2" × 2" × 108" ($18.00) or 114" ($20.00) — all four main board colors: Black, Dark Teak, SPG, Teak. Great for clean inside/outside corner finishes.`;
+      return `We carry three cladding finishing accessories, color-matched to the boards (Black, Dark Teak, SPG, Teak), each in 108" or 114" lengths: <strong>L-Corner</strong> for inside/outside corners ($18 / $20), <strong>Outside Corner</strong> trim ($26 / $28), and <strong>End Trim</strong> for board ends and edges ($26 / $28). They're sold with cladding orders, not separately — you'll find them on the <a href="boards.html#trims" style="color:var(--amber-deep);text-decoration:underline">cladding page</a>. Tell me your layout and I can help estimate how many you'd need.`;
     case 'sample':
       return `Samples are available two ways: <strong>$15 refundable deposit</strong> for local pickup at the showroom, or <strong>$20 non-refundable</strong> if we ship to you. Want me to set up a sample order?`;
     case 'returns':
       return `We ask customers to inspect product at the time of pickup or delivery to confirm everything looks right before accepting. Once accepted, the order is final. Full details are in our <a href="terms.html" style="color:var(--amber-deep);text-decoration:underline">terms &amp; conditions</a>.`;
     case 'warranty':
-      return `WPC composite is engineered for outdoor durability — UV-resistant outer shell, rot- and insect-proof core. We don't publish a specific written warranty; details on what we cover and what we don't are in our <a href="terms.html" style="color:var(--amber-deep);text-decoration:underline">terms &amp; conditions</a>. Many of our contractors have years of installs holding up well — you can also visit the showroom to see and feel the product yourself.`;
+      return `WPC composite is engineered for outdoor durability — a UV-resistant outer shell over a rot- and insect-proof core. We don't offer a specific written warranty, but if anything arrives <strong>defective, we'll replace it</strong> — that's why we ask customers to inspect at pickup or delivery. Full details are in our <a href="terms.html" style="color:var(--amber-deep);text-decoration:underline">terms &amp; conditions</a>. You're also welcome to visit the showroom and inspect the product hands-on before buying.`;
     case 'contractor':
-      return `Yes — we have a <strong>contractor discount program</strong>. Apply with a copy of your contractor license or business card and we'll set you up with tiered pricing based on industry standards and our volume program. We also offer referral bonuses. Want me to start the application?`;
+      return `Yes — our <strong>WalPanel Pros</strong> trade program gives you tiered pricing, same-day quotes, a $50 referral bonus (new customer placing a $500+ order), and 2–3% quarterly cash back once you reach Pro or Elite tier. A license or business card helps but isn't required to apply — you can submit without it and we'll follow up. Want me to start the application?`;
     case 'payment':
       return `We accept <strong>Zelle or cash only</strong>. No cards, no checks. CA sales tax (9.75%) is added at checkout.`;
     case 'custom':
@@ -147,17 +163,32 @@ function botReply(intent, raw){
         const unit = qtyMatch[2].toLowerCase();
         // Boards-style estimate
         if (/board|panel|piece|pc/.test(unit)){
-          let msg = `For about <strong>${n} board${n!==1?'s':''}</strong>, our list price would be roughly $${(n * 35.36).toLocaleString('en-US',{maximumFractionDigits:2})} before tax. `;
-          if (n >= 30) msg += `That's well into project-quote territory — let me get a sales callback so we can put together your best price.`;
-          else if (n >= 15) msg += `That meets our 15-piece minimum. If you might need more later, let me know and we can talk options.`;
-          else msg += `Our minimum order is 15 boards. Want to see if we can adjust the order size?`;
+          const list = n * 35.36;
+          let pct = 0;
+          if (n >= 100) pct = 20; else if (n >= 50) pct = 15; else if (n >= 30) pct = 10;
+          let msg = `For about <strong>${n} board${n!==1?'s':''}</strong>, list price is roughly $${list.toLocaleString('en-US',{maximumFractionDigits:2})} before tax. `;
+          if (pct > 0){
+            const discounted = list * (1 - pct/100);
+            msg += `At ${n} pieces you'd qualify for our <strong>${pct}% volume discount</strong> — about $${discounted.toLocaleString('en-US',{maximumFractionDigits:2})} before tax. Want a sales callback to lock in your exact quote?`;
+          } else if (n >= 15){
+            msg += `That meets our 15-piece minimum. At 30+ pieces you'd start earning volume discounts — let me know if you're scaling up.`;
+          } else {
+            msg += `Our minimum order is 15 boards. Want to see if we can adjust the order size?`;
+          }
           return msg;
         }
         if (/sq|square|ft|foot|feet/.test(unit) && !/linear|run|fence/.test(raw.toLowerCase())){
           const pcs = Math.ceil((n * 1.1) / 6);
-          let msg = `For about <strong>${n} sq ft</strong> with a 10% waste factor, you'd need around ${pcs} of our 108" boards (~$${(pcs * 35.36).toLocaleString('en-US',{maximumFractionDigits:2})} before tax). `;
-          if (pcs >= 30) msg += `For that size, our sales team can put together a project-specific quote. Mind if I grab your contact?`;
-          else msg += `Want me to set up a callback to confirm the details and pricing?`;
+          const list = pcs * 35.36;
+          let pct = 0;
+          if (pcs >= 100) pct = 20; else if (pcs >= 50) pct = 15; else if (pcs >= 30) pct = 10;
+          let msg = `For about <strong>${n} sq ft</strong> with a 10% waste factor, you'd need around ${pcs} of our 108" boards (~$${list.toLocaleString('en-US',{maximumFractionDigits:2})} before tax). `;
+          if (pct > 0){
+            const discounted = list * (1 - pct/100);
+            msg += `At ${pcs} pieces that's a <strong>${pct}% volume discount</strong> — about $${discounted.toLocaleString('en-US',{maximumFractionDigits:2})}. Mind if I grab your contact for an exact quote?`;
+          } else {
+            msg += `Want me to set up a callback to confirm the details and pricing?`;
+          }
           return msg;
         }
         if (/set/.test(unit) || /fence/.test(raw.toLowerCase())){
@@ -186,7 +217,9 @@ function shouldOfferLead(turnCount, intent){
 let chatState = {
   open: false,
   turns: 0,
-  leadShown: false
+  leadShown: false,
+  lastContext: '',   // running summary of what the customer asked about
+  lastQuote: ''      // most recent quote the bot gave, for the capture form
 };
 
 function initChat(){
@@ -220,12 +253,27 @@ function initChat(){
     messages.scrollTop = messages.scrollHeight;
   }
 
-  function appendLeadForm(){
+  function appendLeadForm(mode){
     const wrap = document.createElement('div');
     wrap.className = 'lead-form';
+
+    // Context-aware framing
+    const isQuote = mode === 'quote' && chatState.lastQuote;
+    const title = isQuote ? 'Lock in this quote' : 'Talk to our sales team';
+    const sub = isQuote
+      ? 'Drop your number and we\'ll confirm this pricing, check stock, and lock it in — usually same business day.'
+      : 'Leave your number and we\'ll call you back at your preferred time.';
+    const btnText = isQuote ? 'Send me this quote' : 'Request callback';
+
+    // Pre-fill the quote summary into a read-only context block if we have one
+    const quoteBlock = isQuote
+      ? `<div class="lead-form-quote">📋 ${chatState.lastQuote.slice(0, 180)}${chatState.lastQuote.length > 180 ? '…' : ''}</div>`
+      : '';
+
     wrap.innerHTML = `
-      <div class="lead-form-title">Talk to our sales team</div>
-      <div class="lead-form-sub">Leave your number and we'll call you back at your preferred time.</div>
+      <div class="lead-form-title">${title}</div>
+      <div class="lead-form-sub">${sub}</div>
+      ${quoteBlock}
       <label class="req">Name</label>
       <input type="text" id="lf-name" required>
       <label class="req">Phone</label>
@@ -252,7 +300,7 @@ function initChat(){
       </select>
       <label>Estimated quantity (optional)</label>
       <input type="text" id="lf-qty" placeholder="e.g. 200 sq ft / 30 boards / 8 fence sets">
-      <button id="lf-submit">Request callback</button>
+      <button id="lf-submit">${btnText}</button>
     `;
     messages.appendChild(wrap);
     messages.scrollTop = messages.scrollHeight;
@@ -272,8 +320,10 @@ function initChat(){
         preferred_call_time: document.getElementById('lf-time').value,
         project_type: document.getElementById('lf-project').value,
         quantity_estimate: document.getElementById('lf-qty').value.trim(),
-        form_source: 'Instant chat',
-        _subject: 'New lead — Instant chat',
+        chat_context: chatState.lastContext || '(none captured)',
+        quote_discussed: chatState.lastQuote || '(no quote given)',
+        form_source: isQuote ? 'Instant chat — quote' : 'Instant chat',
+        _subject: isQuote ? 'New lead — Chat quote' : 'New lead — Instant chat',
         timestamp: new Date().toISOString()
       };
 
@@ -292,7 +342,7 @@ function initChat(){
       });
 
       wrap.innerHTML = `<div class="lead-form-title">Thanks, ${name}!</div>
-        <div class="lead-form-sub">Our sales team will call you ${lead.preferred_call_time ? 'in the ' + lead.preferred_call_time.toLowerCase() : 'soon'} at ${phone}. In the meantime, feel free to ask me anything else.</div>`;
+        <div class="lead-form-sub">Our sales team will ${isQuote ? 'confirm your quote and ' : ''}call you ${lead.preferred_call_time ? 'in the ' + lead.preferred_call_time.toLowerCase() : 'soon'} at ${phone}. In the meantime, feel free to ask me anything else.</div>`;
     });
   }
 
@@ -309,9 +359,18 @@ function initChat(){
       const reply = botReply(intent, text);
       appendMsg(reply, 'bot');
 
+      // Track context for the sales team: remember the customer's question
+      chatState.lastContext = text;
+      // If the bot just gave a price/quote, remember a plain-text version for the lead form
+      if (/\$[\d,]/.test(reply) && ['qty','price','delivery','fence','boards','trim'].includes(intent)){
+        chatState.lastQuote = reply.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+      }
+
       if (shouldOfferLead(chatState.turns, intent) && !chatState.leadShown){
         chatState.leadShown = true;
-        setTimeout(() => appendLeadForm(), 500);
+        // Context-aware framing: quote vs general
+        const captureMode = (intent === 'qty' || (chatState.lastQuote && ['price','delivery','fence','boards'].includes(intent))) ? 'quote' : 'general';
+        setTimeout(() => appendLeadForm(captureMode), 500);
       }
     }, 480);
   }
