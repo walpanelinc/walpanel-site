@@ -223,7 +223,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
   }
   .nav-links li:last-child a{border-bottom:0}
   .nav-links a.active::after{display:none}
-  .nav{position:relative}
+  .nav{position:sticky;top:0}
 }
 
 /* ============================================
@@ -1230,14 +1230,67 @@ footer{
   .calc-row{grid-template-columns:1fr;gap:14px}
 }
 
-/* Horizontally scrollable tables on small screens */
+/* Tables: scroll wrapper on tablet, reflow to cards on phone */
 .table-scroll{
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
   margin:0 -4px;
 }
 @media (max-width:600px){
-  .table-scroll .sku-table{min-width:480px}
+  .table-scroll{overflow-x:visible;margin:0}
+  .table-scroll .sku-table,
+  .table-scroll .sku-table tbody,
+  .table-scroll .sku-table tr,
+  .table-scroll .sku-table td{
+    display:block;
+    width:100%;
+  }
+  /* Hide the header row on phones — labels come from data-label */
+  .table-scroll .sku-table thead{
+    position:absolute;
+    width:1px;height:1px;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+  }
+  /* Each row becomes a card */
+  .table-scroll .sku-table tr{
+    background:var(--paper-pure);
+    border:1px solid var(--line-soft);
+    border-radius:6px;
+    padding:6px 14px;
+    margin-bottom:12px;
+  }
+  /* Section-divider rows (e.g. "Longer length — 114") */
+  .table-scroll .sku-table tr td[colspan]{
+    text-align:left !important;
+    border:0;
+    padding:6px 0 !important;
+  }
+  .table-scroll .sku-table td{
+    border:0;
+    border-bottom:1px solid var(--line-soft);
+    padding:9px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+    text-align:right;
+  }
+  .table-scroll .sku-table tr td:last-child{border-bottom:0}
+  /* Label on the left of each cell */
+  .table-scroll .sku-table td::before{
+    content:attr(data-label);
+    font-size:.7rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+    text-align:left;
+    flex-shrink:0;
+  }
+  .table-scroll .sku-table td[colspan]::before{content:none}
+  .table-scroll .sku-table .price{font-size:1.05rem}
+  .table-scroll .sku-table .sku-swatch{margin-right:8px;vertical-align:middle}
 }
 
 /* GALLERY GRID (editorial / asymmetric) */
