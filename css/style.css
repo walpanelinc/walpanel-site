@@ -1227,6 +1227,17 @@ footer{
 @media (max-width:900px){
   .calc{grid-template-columns:1fr;padding:28px;gap:28px}
   .calc-total strong{font-size:1.9rem}
+  .calc-row{grid-template-columns:1fr;gap:14px}
+}
+
+/* Horizontally scrollable tables on small screens */
+.table-scroll{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin:0 -4px;
+}
+@media (max-width:600px){
+  .table-scroll .sku-table{min-width:480px}
 }
 
 /* GALLERY GRID (editorial / asymmetric) */
