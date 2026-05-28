@@ -579,7 +579,21 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
 @media (max-width: 900px){
   .color-strip{padding:60px 20px}
-  .swatches{grid-template-columns:repeat(3,1fr);gap:10px}
+  /* Single clean column — one swatch per row, label inside */
+  .swatches{grid-template-columns:1fr;gap:10px}
+  .swatch{
+    aspect-ratio:auto;
+    height:72px;
+    border-radius:4px;
+  }
+  .swatch-label{
+    bottom:auto;
+    top:50%;
+    transform:translateY(-50%);
+    left:18px;
+    right:18px;
+  }
+  .swatch:hover{transform:none}
 }
 
 /* ============================================
