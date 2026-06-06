@@ -10,6 +10,67 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<!-- SEO: canonical + social cards (added) -->
+<link rel="canonical" href="https://walpanelinc.com/boards.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WalPanel Inc.">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="WPC Cladding Boards — HLC-49 Series | WalPanel Inc.">
+<meta property="og:description" content="Architectural WPC outdoor cladding boards in a range of stocked colors. 108&quot; and 114&quot; lengths, in stock at our Chatsworth showroom — Los Angeles area pickup.">
+<meta property="og:url" content="https://walpanelinc.com/boards.html">
+<meta property="og:image" content="https://walpanelinc.com/images/projects/project-teak-front-door.jpg">
+<meta property="og:image:alt" content="WalPanel WPC cladding and fence in Southern California">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WPC Cladding Boards — HLC-49 Series | WalPanel Inc.">
+<meta name="twitter:description" content="Architectural WPC outdoor cladding boards in a range of stocked colors. 108&quot; and 114&quot; lengths, in stock at our Chatsworth showroom — Los Angeles area pickup.">
+<meta name="twitter:image" content="https://walpanelinc.com/images/projects/project-teak-front-door.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "WPC Cladding Boards — HLC-49 Series",
+  "image": "https://walpanelinc.com/images/projects/project-teak-front-door.jpg",
+  "description": "Architectural wood-plastic composite (WPC) exterior cladding boards, HLC-49 series, 8-5/8\" wide in 108\" and 114\" lengths. UV-resistant dual-layer board, stocked in multiple colors at the Chatsworth showroom for Los Angeles-area pickup.",
+  "brand": {
+    "@type": "Brand",
+    "name": "WalPanel"
+  },
+  "category": "Exterior Wall Cladding",
+  "material": "Wood-Plastic Composite (WPC)",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "35.36",
+    "offerCount": "6",
+    "availability": "https://schema.org/InStock",
+    "areaServed": "Los Angeles, CA",
+    "seller": {
+      "@type": "Organization",
+      "name": "WalPanel Inc."
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://walpanelinc.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Cladding",
+      "item": "https://walpanelinc.com/boards.html"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -31,7 +92,7 @@
       <li><a href="find-a-pro.html">Find a Pro</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <a class="nav-cta" href="contact.html">Visit Showroom</a>
+    <a class="nav-cta" href="quote.html">Get a Quote</a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -237,31 +298,46 @@
     </div>
     <p class="section-lead">Finishing pieces that give a cladding installation clean corners and edges. Color-matched to the HLC-49 board line in Black, Dark Teak, SPG, and Teak. These are cladding accessories — we sell them with cladding orders, not on their own. Tell us your layout and we'll work out how many you need.</p>
   </div>
-  <div class="table-scroll"><table class="sku-table">
-    <thead>
-      <tr><th>Trim</th><th>Use</th><th>108"</th><th>114"</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label="Trim"><strong>L-Corner</strong></td>
-        <td data-label="Use">Inside &amp; outside corners</td>
-        <td class="price" data-label="108&quot;">$18.00</td>
-        <td class="price" data-label="114&quot;">$20.00</td>
-      </tr>
-      <tr>
-        <td data-label="Trim"><strong>Outside Corner</strong></td>
-        <td data-label="Use">Wraps external corners cleanly</td>
-        <td class="price" data-label="108&quot;">$26.00</td>
-        <td class="price" data-label="114&quot;">$28.00</td>
-      </tr>
-      <tr>
-        <td data-label="Trim"><strong>End Trim</strong></td>
-        <td data-label="Use">Finishes board ends &amp; edges</td>
-        <td class="price" data-label="108&quot;">$26.00</td>
-        <td class="price" data-label="114&quot;">$28.00</td>
-      </tr>
-    </tbody>
-  </table></div>
+  <style>
+.trim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
+.trim-card{background:var(--paper-pure);border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.trim-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-bottom:1px solid var(--line-soft);background:#fff}
+.trim-card-body{padding:22px 24px 26px}
+.trim-card h3{font-size:1.5rem;letter-spacing:-.01em;margin:6px 0 10px}
+.trim-card .trim-price{display:flex;gap:18px;font-size:.92rem;color:var(--ink-soft);padding:10px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);margin-bottom:12px}
+.trim-card .trim-price strong{font-family:'Source Serif 4',serif;color:var(--amber-deep);font-weight:600}
+.trim-card p{font-size:.92rem;color:var(--ink-soft);line-height:1.6}
+@media(max-width:900px){.trim-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
+</style>
+  <div class="trim-grid">
+    <article class="trim-card">
+      <img src="images/products/trim-lcorner.jpg" alt="WalPanel WPC L-Corner trim, color-matched teak">
+      <div class="trim-card-body">
+        <span class="eyebrow" style="display:block;margin-bottom:6px">Inside &amp; outside corners</span>
+        <h3>L-Corner</h3>
+        <div class="trim-price"><span>108&Prime; <strong>$18.00</strong></span><span>114&Prime; <strong>$20.00</strong></span></div>
+        <p>A slim, color-matched angle that finishes both inside and outside corners of a cladding run, tucking against the boards for a crisp, continuous corner line.</p>
+      </div>
+    </article>
+    <article class="trim-card">
+      <img src="images/products/trim-outside.jpg" alt="WalPanel WPC Outside Corner trim, color-matched teak">
+      <div class="trim-card-body">
+        <span class="eyebrow" style="display:block;margin-bottom:6px">Wraps external corners</span>
+        <h3>Outside Corner</h3>
+        <div class="trim-price"><span>108&Prime; <strong>$26.00</strong></span><span>114&Prime; <strong>$28.00</strong></span></div>
+        <p>A deeper corner cap that wraps external building corners, concealing the cut board ends for a clean, finished 90&deg; return.</p>
+      </div>
+    </article>
+    <article class="trim-card">
+      <img src="images/products/trim-end.jpg" alt="WalPanel WPC End Trim, color-matched teak">
+      <div class="trim-card-body">
+        <span class="eyebrow" style="display:block;margin-bottom:6px">Finishes board ends &amp; edges</span>
+        <h3>End Trim</h3>
+        <div class="trim-price"><span>108&Prime; <strong>$26.00</strong></span><span>114&Prime; <strong>$28.00</strong></span></div>
+        <p>A finishing trim that caps exposed board ends and edges &mdash; at windows, doors, and where the cladding stops &mdash; for a tidy, weather-smart edge.</p>
+      </div>
+    </article>
+  </div>
   <p style="font-size:.8rem;color:var(--ink-soft);margin-top:14px">Prices per piece, before tax, in 108" or 114" lengths. Color-matched to the board line: Black, Dark Teak, SPG, Teak. Trims are sold as part of a cladding order — ask us how many your project needs.</p>
 </section>
 
@@ -283,15 +359,15 @@
     <h2 style="margin-top:14px;">See the colors<br><em>in person.</em></h2>
     <p class="section-lead" style="max-width:none;">Our showroom holds 108"-long samples of every color above. Bring your trim board, your designer, or just yourself — we'll book a private appointment.</p>
     <dl class="showroom-meta">
-      <dt>Address</dt><dd>21350 Lassen St, Chatsworth, CA 91311 (ReadySpaces)</dd>
+      <dt>Address</dt><dd>21350 Lassen St, Unit E17, Chatsworth, CA 91311 (ReadySpaces)</dd>
       <dt>Hours</dt><dd>By appointment only</dd>
       <dt>Sample</dt><dd>$15 refundable for pickup · $20 non-refundable to ship</dd>
     </dl>
     <a class="btn btn-primary" href="contact.html">Book a visit</a>
   </div>
   <div class="showroom-map">
-    <iframe title="WalPanel showroom location — 21350 Lassen St, Chatsworth, CA 91311" src="https://www.google.com/maps?q=21350+Lassen+St,+Chatsworth,+CA+91311&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-    <a class="showroom-map-tag" href="https://www.google.com/maps/dir/?api=1&destination=21350+Lassen+St,+Chatsworth,+CA+91311" target="_blank" rel="noopener">21350 Lassen St, Chatsworth&nbsp;&nbsp;·&nbsp;&nbsp;Get directions →</a>
+    <iframe title="WalPanel showroom location — 21350 Lassen St, Unit E17, Chatsworth, CA 91311" src="https://www.google.com/maps?q=21350+Lassen+St,+Chatsworth,+CA+91311&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    <a class="showroom-map-tag" href="https://www.google.com/maps/dir/?api=1&destination=21350+Lassen+St,+Chatsworth,+CA+91311" target="_blank" rel="noopener">21350 Lassen St, Unit E17, Chatsworth&nbsp;&nbsp;·&nbsp;&nbsp;Get directions →</a>
   </div>
 </section>
 
@@ -312,6 +388,7 @@
     <div>
       <h4>Resources</h4>
       <ul>
+        <li><a href="quote.html">Get a quote</a></li>
         <li><a href="gallery.html">Project gallery</a></li>
         <li><a href="contractors.html">Contractor program</a></li>
         <li><a href="docs/fence-install.pdf">Fence install guide</a></li>
@@ -320,8 +397,9 @@
     <div>
       <h4>Visit</h4>
       <ul>
-        <li>21350 Lassen St</li>
+        <li>21350 Lassen St, Unit E17</li>
         <li>Chatsworth, CA 91311</li>
+        <li><a href="tel:+18582566236" style="color:rgba(245,241,234,.8)">(858) 256-6236</a></li>
         <li>By appointment only</li>
         <li><a href="contact.html">Contact us →</a></li>
       </ul>
