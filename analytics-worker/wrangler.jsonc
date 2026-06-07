@@ -1,0 +1,29 @@
+{
+  // WalPanel Inc. — standalone analytics Worker.
+  // Runs ONLY on /api/track, /api/stats and /admin. It does not touch
+  // how the rest of walpanelinc.com is served.
+  "name": "walpanel-analytics",
+  "main": "src/index.js",
+  "compatibility_date": "2025-05-01",
+
+  // Bind the D1 database. After you create it (see TRACKING-SETUP.md),
+  // paste the database_id Cloudflare gives you here.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "walpanel_analytics",
+      "database_id": "PASTE_DATABASE_ID_HERE"
+    }
+  ],
+
+  // Run this Worker on these paths of your live domain.
+  // (Requires walpanelinc.com to be on this Cloudflare account — it is.)
+  "routes": [
+    { "pattern": "walpanelinc.com/api/track", "zone_name": "walpanelinc.com" },
+    { "pattern": "walpanelinc.com/api/stats", "zone_name": "walpanelinc.com" },
+    { "pattern": "walpanelinc.com/admin", "zone_name": "walpanelinc.com" },
+    { "pattern": "walpanelinc.com/admin/*", "zone_name": "walpanelinc.com" }
+  ],
+
+  "observability": { "enabled": true }
+}

@@ -213,11 +213,22 @@ function shouldOfferLead(turnCount, intent){
   return false;
 }
 
+// === ANALYTICS + SMS HELPERS ============================
+function track(t, m){ try { (window.wpTrack || function(){})(t, m); } catch (e) {} }
+function smsHref(num, body){
+  var ua = navigator.userAgent || '';
+  var sep = /iPhone|iPad|iPod|Macintosh|Mac OS X/i.test(ua) ? '&' : '?';  // Apple devices expect &body=
+  return 'sms:' + num + sep + 'body=' + encodeURIComponent(body);
+}
+
 // === UI WIRING ============================
 let chatState = {
   open: false,
   turns: 0,
   leadShown: false,
+  leadSubmitted: false,   // did they submit the callback form?
+  textLinkShown: false,   // has the Google Voice text link been offered?
+  skipTimer: null,        // timer that surfaces the text link if the form is ignored
   lastContext: '',   // running summary of what the customer asked about
   lastQuote: ''      // most recent quote the bot gave, for the capture form
 };
@@ -238,6 +249,7 @@ function initChat(){
     bubble.style.display = 'none';
     chatState.open = true;
     input.focus();
+    track('chat_open');
   });
   closeBtn.addEventListener('click', () => {
     win.classList.remove('open');
@@ -327,6 +339,10 @@ function initChat(){
         timestamp: new Date().toISOString()
       };
 
+      chatState.leadSubmitted = true;
+      clearTimeout(chatState.skipTimer);
+      track('lead_submitted', { mode: isQuote ? 'quote' : 'general' });
+
       // POST to Formspree
       fetch('https://formspree.io/f/xpqnoajd', {
         method: 'POST',
@@ -346,6 +362,37 @@ function initChat(){
     });
   }
 
+  // === GOOGLE VOICE TEXT LINK (shown only if the callback form is skipped) ===
+  function showTextLink(reason){
+    if (chatState.textLinkShown) return;
+    chatState.textLinkShown = true;
+    clearTimeout(chatState.skipTimer);
+
+    const topic = chatState.lastContext ? (' about: "' + chatState.lastContext.slice(0, 80) + '"') : '';
+    const body = 'Hi WalPanel! I was just on your site and have a question' + topic + '.';
+    const href = smsHref('+18582566236', body);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'lead-form';
+    wrap.innerHTML =
+      '<div class="lead-form-title">Prefer to text us?</div>' +
+      '<div class="lead-form-sub">One tap to text our sales line at (858)&nbsp;256-6236 — we usually reply quickly during business hours.</div>' +
+      '<a id="wp-sms" href="' + href + '" style="display:block;text-align:center;background:var(--amber-deep,#c07d28);color:#fff;padding:12px;border-radius:8px;text-decoration:none;font-weight:600;margin-top:2px">&#128172; Text (858) 256-6236</a>' +
+      '<div style="font-size:12px;color:#6b7280;margin-top:8px;text-align:center">On a computer? <a href="tel:+18582566236" style="color:var(--amber-deep,#c07d28);text-decoration:underline">Call instead</a> &nbsp;&middot;&nbsp; <button id="wp-copy" type="button" style="border:1px solid #ddd;background:#fff;border-radius:6px;padding:3px 8px;cursor:pointer">Copy number</button></div>';
+    messages.appendChild(wrap);
+    messages.scrollTop = messages.scrollHeight;
+    track('text_link_show', { reason: reason });
+
+    const smsA = wrap.querySelector('#wp-sms');
+    if (smsA) smsA.addEventListener('click', function(){ track('text_link_click', { via: 'sms', reason: reason }); });
+    const copyB = wrap.querySelector('#wp-copy');
+    if (copyB) copyB.addEventListener('click', function(){
+      try { navigator.clipboard.writeText('858-256-6236'); copyB.textContent = 'Copied!'; }
+      catch (e) { copyB.textContent = '858-256-6236'; }
+      track('text_link_click', { via: 'copy', reason: reason });
+    });
+  }
+
   function send(text){
     if (!text) return;
     appendMsg(text.replace(/</g,'&lt;'), 'user');
@@ -358,6 +405,7 @@ function initChat(){
       const intent = classify(text);
       const reply = botReply(intent, text);
       appendMsg(reply, 'bot');
+      track('chat_message', { turn: chatState.turns, intent: intent });
 
       // Track context for the sales team: remember the customer's question
       chatState.lastContext = text;
@@ -366,11 +414,24 @@ function initChat(){
         chatState.lastQuote = reply.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
       }
 
+      // "Link only if form skipped": the callback form was already offered and
+      // they kept chatting without submitting — surface the text link now.
+      if (chatState.leadShown && !chatState.leadSubmitted && !chatState.textLinkShown){
+        showTextLink('kept_chatting');
+      }
+
       if (shouldOfferLead(chatState.turns, intent) && !chatState.leadShown){
         chatState.leadShown = true;
+        // Why sales is being offered — drives the "3 rounds" / "contact sales" metric
+        const reason = intent === 'handoff' ? 'contact_sales' : (chatState.turns >= 3 ? '3rounds' : intent);
+        track('chat_handoff', { reason: reason, turn: chatState.turns });
         // Context-aware framing: quote vs general
         const captureMode = (intent === 'qty' || (chatState.lastQuote && ['price','delivery','fence','boards'].includes(intent))) ? 'quote' : 'general';
         setTimeout(() => appendLeadForm(captureMode), 500);
+        // If they ignore the form for ~25s, offer the one-tap Google Voice text link.
+        chatState.skipTimer = setTimeout(() => {
+          if (!chatState.leadSubmitted && !chatState.textLinkShown) showTextLink('form_timeout');
+        }, 25000);
       }
     }, 480);
   }
@@ -389,3 +450,4 @@ function initChat(){
 }
 
 document.addEventListener('DOMContentLoaded', initChat);
+/* analytics + Google Voice text link wired in — v1 */
