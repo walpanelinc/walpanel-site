@@ -243,24 +243,24 @@
       <div class="calc-row">
         <div class="calc-field">
           <label>Wall width (ft)</label>
-          <input type="number" id="bc-width" min="0" step="0.5" placeholder="e.g. 24">
+          <input aria-label="Wall width" type="number" id="bc-width" min="0" step="0.5" placeholder="e.g. 24">
         </div>
         <div class="calc-field">
           <label>Wall height (ft)</label>
-          <input type="number" id="bc-height" min="0" step="0.5" placeholder="e.g. 10">
+          <input aria-label="Wall height" type="number" id="bc-height" min="0" step="0.5" placeholder="e.g. 10">
         </div>
       </div>
       <div class="calc-row">
         <div class="calc-field">
           <label>Board length</label>
-          <select id="bc-size">
+          <select aria-label="Board size" id="bc-size">
             <option value="108">108" — $35.36</option>
             <option value="114">114" — $37.18</option>
           </select>
         </div>
         <div class="calc-field">
           <label>Waste factor</label>
-          <select id="bc-waste">
+          <select aria-label="Waste allowance" id="bc-waste">
             <option value="10" selected>10% standard</option>
             <option value="15">15% complex cuts</option>
             <option value="5">5% simple rectangle</option>
@@ -409,7 +409,7 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 WalPanel Inc. · Part of <a href="https://wallshell.com" style="color:rgba(245,241,234,.7);opacity:.7" target="_blank" rel="noopener">Walpanel Inc.</a>, est. 2002 · All rights reserved.</span>
-    <span><a href="terms.html" style="opacity:.7;color:rgba(245,241,234,.7)">Terms &amp; conditions</a> · CA sales tax 9.75% added at checkout.</span>
+    <span><a href="terms.html" style="opacity:.7;color:rgba(245,241,234,.7)">Terms &amp; conditions</a> &middot; <a href="privacy.html" style="opacity:.7;color:rgba(245,241,234,.7)">Privacy</a> &middot; <a href="accessibility.html" style="opacity:.7;color:rgba(245,241,234,.7)">Accessibility</a> · CA sales tax 9.75% added at checkout.</span>
   </div>
 </footer>
 
@@ -436,7 +436,7 @@
     <button class="quick-reply">Talk to sales</button>
   </div>
   <div class="chat-input">
-    <input type="text" id="chat-input" placeholder="Type a message…" autocomplete="off">
+    <input aria-label="Chat message" type="text" id="chat-input" placeholder="Type a message…" autocomplete="off">
     <button class="chat-send" id="chat-send">Send</button>
   </div>
 </div>
