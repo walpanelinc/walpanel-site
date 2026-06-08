@@ -71,7 +71,7 @@ export const DASHBOARD_HTML = `<!doctype html>
 
   <section>
     <h2>Daily trend</h2>
-    <canvas id="trend" height="92"></canvas>
+    <div style="position:relative;height:240px"><canvas id="trend"></canvas></div>
   </section>
 
   <div class="two">

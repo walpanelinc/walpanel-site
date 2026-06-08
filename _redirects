@@ -1,0 +1,3 @@
+# 301 redirects — keep old indexed URLs alive after the boards -> cladding rename
+/boards.html /cladding.html 301
+/boards /cladding.html 301
