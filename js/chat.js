@@ -157,10 +157,9 @@ function initChat(){
     const wrap = document.createElement('div');
     wrap.className = 'lead-form';
     wrap.innerHTML =
-      '<div class="lead-form-title">Text or call our sales line</div>' +
+      '<div class="lead-form-title">Text our sales line</div>' +
       '<div class="lead-form-sub">Fastest way to reach us — we usually reply quickly during business hours.</div>' +
       '<a id="wp-sms" href="' + href + '" style="display:block;text-align:center;background:var(--amber-deep,#c07d28);color:#fff;padding:12px;border-radius:8px;text-decoration:none;font-weight:600;margin-top:2px">&#128172; Text (858) 256-6236</a>' +
-      '<a href="tel:+18582566236" style="display:block;text-align:center;border:1px solid var(--amber-deep,#c07d28);color:var(--amber-deep,#c07d28);padding:11px;border-radius:8px;text-decoration:none;font-weight:600;margin-top:8px">&#128222; Call (858) 256-6236</a>' +
       '<div style="font-size:12px;color:#6b7280;margin-top:8px;text-align:center"><button id="wp-copy" type="button" style="border:1px solid #ddd;background:#fff;border-radius:6px;padding:3px 8px;cursor:pointer">Copy number</button></div>';
     messages.appendChild(wrap);
     messages.scrollTop = messages.scrollHeight;

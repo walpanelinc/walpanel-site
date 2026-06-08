@@ -203,7 +203,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 @media (max-width: 900px){
   .nav-inner{padding:14px 20px;gap:14px}
   .nav-cta{padding:9px 16px;font-size:.82rem;white-space:nowrap}
-  .nav-call{padding:4px}
+  .nav-call{display:none}
   .nav-toggle{display:flex}
   /* Mobile dropdown menu */
   .nav-links{
@@ -1462,6 +1462,34 @@ footer{
 @media (max-width:700px){
   .form-card{padding:24px}
   .form-card .grid-2{grid-template-columns:1fr;gap:14px}
+}
+
+/* ===== Trust strip ===== */
+.trust-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:13px 30px;padding:20px 40px;background:var(--ink)}
+.trust-strip span{display:inline-flex;align-items:center;gap:8px;font-size:.84rem;font-weight:500;color:rgba(245,241,234,.92)}
+.trust-strip svg{width:16px;height:16px;color:var(--amber);flex-shrink:0}
+@media(max-width:600px){.trust-strip{padding:16px 20px;gap:11px 18px}.trust-strip span{font-size:.79rem}}
+
+/* ===== How buying works ===== */
+.buy-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 34px;margin-top:6px}
+.buy-step{display:flex;gap:14px;align-items:flex-start}
+.buy-step .step-num{font-family:'Source Serif 4',serif;font-size:1.6rem;font-weight:500;color:var(--amber-deep);line-height:1;flex-shrink:0;min-width:30px}
+.buy-step h3{font-size:1.05rem;margin:2px 0 4px}
+.buy-step p{font-size:.9rem;color:var(--ink-soft);line-height:1.55;margin:0}
+@media(max-width:900px){.buy-steps{grid-template-columns:1fr 1fr;gap:22px 26px}}
+@media(max-width:560px){.buy-steps{grid-template-columns:1fr}}
+
+/* ===== Sticky mobile CTA bar ===== */
+.mobile-cta-bar{display:none}
+@media(max-width:900px){
+  .mobile-cta-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:200;gap:8px;padding:8px 10px;background:var(--paper-pure);border-top:1px solid var(--line-soft);box-shadow:0 -6px 18px rgba(26,29,33,.12)}
+  .mobile-cta-bar a{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 6px;border-radius:7px;font-size:.85rem;font-weight:600;text-decoration:none;white-space:nowrap}
+  .mobile-cta-bar svg{width:16px;height:16px;flex-shrink:0}
+  .mobile-cta-bar .mc-text{background:var(--ink);color:var(--paper)}
+  .mobile-cta-bar .mc-quote{background:var(--amber);color:var(--ink)}
+  .mobile-cta-bar .mc-visit{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+  body{padding-bottom:64px}
+  .chat-bubble{bottom:76px !important}
 }
 
 .two-col{
