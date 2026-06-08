@@ -160,6 +160,20 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .nav-cta:hover{background:var(--amber-deep)}
 .nav-cta::after{content:'→'; font-size:1rem; line-height:1}
 
+.nav-call{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--ink);
+  font-size:.86rem;
+  font-weight:600;
+  white-space:nowrap;
+  transition:color .2s var(--ease);
+}
+.nav-call:hover{color:var(--amber-deep)}
+.nav-call svg{width:18px; height:18px; flex-shrink:0; color:var(--amber-deep)}
+@media (max-width:1080px){ .nav-call .nav-call-num{display:none} }
+
 .nav-toggle{
   display:none;
   flex-direction:column;
@@ -189,6 +203,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 @media (max-width: 900px){
   .nav-inner{padding:14px 20px;gap:14px}
   .nav-cta{padding:9px 16px;font-size:.82rem;white-space:nowrap}
+  .nav-call{padding:4px}
   .nav-toggle{display:flex}
   /* Mobile dropdown menu */
   .nav-links{
@@ -1399,7 +1414,8 @@ footer{
   color:var(--ink-soft);
   font-weight:600;
 }
-.form-card label.req::after{content:' ·';color:var(--rust);font-weight:700}
+.form-card label.req{position:relative}
+.form-card label.req::after{content:'*';position:absolute;top:0;right:0;color:var(--rust);font-weight:700;font-size:.9rem;line-height:1.4}
 .form-card input,
 .form-card select,
 .form-card textarea{
