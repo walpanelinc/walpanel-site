@@ -1052,13 +1052,13 @@ footer{
   gap:60px;
   align-items:end;
 }
-.page-head h1{
+.page-head h1, .page-head h2{
   font-size:clamp(2.6rem, 6vw, 5rem);
   line-height:.95;
   margin-top:16px;
   letter-spacing:-.015em;
 }
-.page-head h1 em{font-style:italic; color:var(--amber-deep); font-weight:300; letter-spacing:.005em; padding-right:.04em}
+.page-head h1 em, .page-head h2 em{font-style:italic; color:var(--amber-deep); font-weight:300; letter-spacing:.005em; padding-right:.04em}
 .page-head p{
   font-size:1.05rem;
   color:var(--ink-soft);
