@@ -1947,3 +1947,28 @@ footer{
 @media (max-width:900px){
   .gallery-wild{grid-auto-rows:240px}
 }
+
+/* Footer service-areas link strip */
+.footer-areas{
+  max-width:1440px;
+  margin:0 auto;
+  padding:20px 0 4px;
+  font-size:.82rem;
+  color:rgba(245,241,234,.5);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px 16px;
+}
+.footer-areas span{
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.68rem;
+  font-weight:600;
+  color:var(--amber-soft);
+}
+.footer-areas a{
+  color:rgba(245,241,234,.72);
+  text-decoration:none;
+}
+.footer-areas a:hover{color:var(--amber-soft);text-decoration:underline}
