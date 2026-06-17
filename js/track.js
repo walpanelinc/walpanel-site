@@ -123,4 +123,39 @@
       /quote/i.test(href) ? 'quote' : 'link';
     send('cta_click', { label: label(el), href: href.slice(0, 120), kind: kind });
   }, true);
+
+  // --- form funnel: capture intent ("tried") and completed submissions ---
+  function formName(f) {
+    var src = f.querySelector('[name="form_source"]');
+    var v = (src && src.value) || f.getAttribute('data-panel') || f.getAttribute('name') || 'form';
+    return String(v).slice(0, 60);
+  }
+
+  // form_start: first time a visitor interacts with a form on this page
+  // (captures people who began a form but never submitted = "tried")
+  var started = {};
+  document.addEventListener('focusin', function (e) {
+    var f = e.target && e.target.closest ? e.target.closest('form') : null;
+    if (!f) return;
+    var key = formName(f);
+    if (started[key]) return;
+    started[key] = 1;
+    send('form_start', { form: key, page: location.pathname });
+  }, true);
+
+  // lead_submitted: a real, validated form submission (the lead itself).
+  // Fires before the page navigates to Formspree; sendBeacon guarantees delivery.
+  document.addEventListener('submit', function (e) {
+    var f = e.target;
+    if (!f || f.tagName !== 'FORM') return;
+    send('lead_submitted', { form: formName(f), page: location.pathname });
+  }, true);
+
+  // submit_attempt: button clicked but HTML5 validation blocked it
+  // (required fields empty / bad email) — a "tried but failed" attempt
+  document.addEventListener('invalid', function (e) {
+    var f = e.target && e.target.form ? e.target.form : null;
+    if (!f) return;
+    send('submit_attempt', { form: formName(f), page: location.pathname, ok: false });
+  }, true);
 })();
