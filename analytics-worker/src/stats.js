@@ -42,6 +42,10 @@ export function computeStats(rows) {
   const handoff = new Set();
   const contactSales = new Set();   // handoff because they asked for sales
   const clickers = new Set();       // clicked any tracked CTA
+  const formStart = new Set();      // began filling out any form ("tried")
+  const formFail = new Set();       // hit submit but validation blocked it
+  const formStartsByName = new Map(); // form_source -> Set(vid) started
+  const formDoneByName = new Map();   // form_source -> Set(vid) completed
 
   const msgCount = new Map();        // vid -> # chat messages
   let pageviews = 0;
@@ -107,6 +111,14 @@ export function computeStats(rows) {
       case 'lead_submitted':
         leadForm.add(vid);
         day.lead.add(vid);
+        add(formDoneByName, meta.form || 'form', vid);
+        break;
+      case 'form_start':
+        formStart.add(vid);
+        add(formStartsByName, meta.form || 'form', vid);
+        break;
+      case 'submit_attempt':
+        formFail.add(vid);
         break;
       case 'text_link_show':
         textShow.add(vid);
@@ -167,6 +179,20 @@ export function computeStats(rows) {
       // helpful rates
       openRate: pct(chatOpen.size, V),
       chatToContactRate: pct(leftContact.size, chatted.size)
+    },
+    forms: {
+      started: formStart.size,            // people who began any form
+      completed: leadForm.size,           // people who submitted (the leads)
+      abandoned: [...formStart].filter((v) => !leadForm.has(v)).length,
+      failedValidation: formFail.size,    // tried to submit, blocked by validation
+      completionRate: pct(leadForm.size, formStart.size),
+      byForm: [...new Set([...formStartsByName.keys(), ...formDoneByName.keys()])]
+        .map((name) => ({
+          name,
+          started: (formStartsByName.get(name) || new Set()).size,
+          completed: (formDoneByName.get(name) || new Set()).size
+        }))
+        .sort((a, b) => b.started - a.started)
     },
     zips: topN(byZip, 30, ([zip, set]) => ({
       zip,

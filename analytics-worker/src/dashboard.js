@@ -70,6 +70,13 @@ export const DASHBOARD_HTML = `<!doctype html>
   </section>
 
   <section>
+    <h2>Contact forms</h2>
+    <div class="grid" id="formcards"></div>
+    <div id="formtable" style="margin-top:14px"></div>
+    <div class="note">"Started" = began filling a form. "Completed" = submitted (your leads). "Abandoned" = started but never submitted. "Blocked at submit" = hit submit but a required/invalid field stopped it.</div>
+  </section>
+
+  <section>
     <h2>Daily trend</h2>
     <div style="position:relative;height:240px"><canvas id="trend"></canvas></div>
   </section>
@@ -159,6 +166,17 @@ function render(s){
       {k:'Left contact — via text link', v:n(cf.viaTextLink)},
       {k:'Chatted, no contact', v:n(cf.noContact)}
     ]
+  );
+
+  var fm = s.forms || {started:0,completed:0,abandoned:0,failedValidation:0,completionRate:0,byForm:[]};
+  el('formcards').innerHTML =
+    card('Forms started', n(fm.started), 'began a form') +
+    card('Forms completed', n(fm.completed), pc(fm.completionRate)+' of starts', true) +
+    card('Abandoned', n(fm.abandoned), 'started, never submitted') +
+    card('Blocked at submit', n(fm.failedValidation), 'validation stopped them');
+  el('formtable').innerHTML = table(
+    [{label:'Form',key:'name'},{label:'Started',key:'started',n:true},{label:'Completed',key:'completed',n:true}],
+    fm.byForm || []
   );
 
   el('zips').innerHTML = table(
