@@ -588,6 +588,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .sw-darkteak-b{background:linear-gradient(160deg, #5a3a22 0%, #1a1410 60%, #0e0d0c 100%)}
 .sw-spg{background:linear-gradient(160deg, #b8a382 0%, #7a6648 100%)}
 .sw-spg-b{background:linear-gradient(160deg, #b8a382 0%, #6a5638 60%, #1a1410 100%)}
+.sw-maple{background:linear-gradient(160deg, #f0dcb4 0%, #cfae7c 100%)}
 .sw-teak{background:linear-gradient(160deg, #c08555 0%, #8a4f25 100%)}
 .sw-teak-b{background:linear-gradient(160deg, #c08555 0%, #6a3815 60%, #1a1410 100%)}
 .sw-teak-wg{background:repeating-linear-gradient(180deg, #c08555 0px, #b8794a 3px, #a8693a 6px, #c08555 9px)}
@@ -1640,6 +1641,21 @@ footer{
 }
 .info-strip a:hover{background:var(--amber-deep)}
 .info-strip a::after{content:'↓'}
+
+/* inline prose links inside an info-strip paragraph are text links, not buttons */
+.info-strip p a{
+  display:inline;
+  background:none;
+  color:var(--amber-deep);
+  padding:0;
+  border-radius:0;
+  font-size:inherit;
+  font-weight:600;
+  white-space:normal;
+  text-decoration:underline;
+}
+.info-strip p a::after{content:none}
+.info-strip p a:hover{background:none;color:var(--ink)}
 
 @media (max-width:700px){
   .info-strip{flex-direction:column;align-items:flex-start;padding:18px}
