@@ -111,8 +111,9 @@
         <select name="project_type" id="project_type" required>
           <option value="">Choose…</option>
           <option value="cladding">Wall cladding</option>
+          <option value="decking">Decking</option>
           <option value="fence">Fence</option>
-          <option value="both">Both cladding &amp; fence</option>
+          <option value="both">Multiple products</option>
         </select>
       </label>
 
@@ -156,6 +157,34 @@
           </div>
           <label>End Trim — $26<input type="number" min="0" step="1" name="trim_end" id="trim_end" placeholder="0" inputmode="numeric"></label>
         </div>
+      </div>
+
+      <!-- DECKING -->
+      <div class="prod-block" id="block-decking">
+        <h4>Deck boards</h4>
+        <label>Measure by
+          <div class="seg" data-seg="deck-mode">
+            <button type="button" data-val="area" class="on">Deck area (sq ft)</button>
+            <button type="button" data-val="boards">Number of boards</button>
+          </div>
+          <input type="hidden" name="decking_mode" id="decking_mode" value="area">
+        </label>
+        <div class="grid-2">
+          <label id="deck-area-wrap">Deck area
+            <input type="number" min="0" step="1" name="decking_area" id="decking_area" placeholder="e.g. 280" inputmode="numeric">
+            <span class="hint">Square feet of deck. Each 16 ft board covers 8 sq ft; we add 10% for waste.</span>
+          </label>
+          <label id="deck-boards-wrap" style="display:none">Boards
+            <input type="number" min="0" step="1" name="decking_boards" id="decking_boards" placeholder="e.g. 40" inputmode="numeric">
+            <span class="hint">1&Prime; &times; 6&Prime; &times; 16 ft boards, sold individually.</span>
+          </label>
+          <label>Color
+            <select name="decking_color" id="decking_color">
+              <option>Walnut</option>
+            </select>
+          </label>
+        </div>
+        <p class="hint" style="margin-top:10px">Framing, hidden fastener clips, and fascia are quoted separately &mdash; tell us the layout in the notes and we&rsquo;ll price them with the boards.</p>
       </div>
 
       <!-- FENCE -->
@@ -258,7 +287,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-brand"><span class="footer-brand-logo" aria-hidden="true"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(28, 36)"><rect x="0" y="0" width="16" height="128" rx="2" fill="currentColor"/><rect x="20" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="40" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="60" y="40" width="16" height="88" rx="2" fill="currentColor"/><rect x="80" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="100" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="120" y="0" width="16" height="128" rx="2" fill="currentColor"/></g></svg></span><span>WalPanel Inc.</span></div>
-      <p class="footer-tag">Architectural WPC cladding and modular fence panels, stocked at our Chatsworth showroom. Serving Los Angeles and surrounding markets.</p>
+      <p class="footer-tag">Architectural WPC cladding, composite decking, and modular fence panels, stocked at our Chatsworth showroom. Serving Los Angeles and surrounding markets.</p>
     </div>
     <div>
       <h4>Products</h4>
@@ -335,6 +364,7 @@
 <script>
   // ---- Pricing constants (stocked, transparent) ----
   var BOARD_PRICE = 35.36, BOARD_SQFT = 6.0, BOARD_MIN = 15;
+  var DECK_PRICE = 35.36, DECK_SQFT = 8.0, DECK_WASTE = 0.10;
   var FENCE_PRICE = 248, FENCE_LF = 6, FENCE_MIN = 5;
   var TRIM = { lcorner: 18, outside: 26, end: 26 };
   var TAX = 0.0975;
@@ -354,6 +384,10 @@
           $('cladding_mode').value = val;
           $('clad-area-wrap').style.display = val === 'area' ? '' : 'none';
           $('clad-boards-wrap').style.display = val === 'boards' ? '' : 'none';
+        } else if(which === 'deck-mode'){
+          $('decking_mode').value = val;
+          $('deck-area-wrap').style.display = val === 'area' ? '' : 'none';
+          $('deck-boards-wrap').style.display = val === 'boards' ? '' : 'none';
         } else {
           $('fence_mode').value = val;
           $('fence-lf-wrap').style.display = val === 'lf' ? '' : 'none';
@@ -368,6 +402,7 @@
   function syncBlocks(){
     var t = $('project_type').value;
     $('block-cladding').classList.toggle('show', t === 'cladding' || t === 'both');
+    $('block-decking').classList.toggle('show', t === 'decking' || t === 'both');
     $('block-fence').classList.toggle('show', t === 'fence' || t === 'both');
   }
 
@@ -400,6 +435,21 @@
         var tp = [];
         if(tl) tp.push(tl + ' L-corner'); if(to) tp.push(to + ' outside corner'); if(te) tp.push(te + ' end trim');
         rows.push([tp.join(', ') + ' · ' + $('cladding_color').value, money(trimCost)]);
+      }
+    }
+    if(t === 'decking' || t === 'both'){
+      var deckBoards = 0;
+      if($('decking_mode').value === 'area'){
+        var deckArea = num('decking_area');
+        deckBoards = deckArea > 0 ? Math.ceil((deckArea * (1 + DECK_WASTE)) / DECK_SQFT) : 0;
+      } else {
+        deckBoards = Math.round(num('decking_boards'));
+      }
+      if(deckBoards > 0){
+        var deckCost = deckBoards * DECK_PRICE;
+        materials += deckCost;
+        rows.push([deckBoards + ' deck board' + (deckBoards>1?'s':'') + ' (' + (deckBoards*DECK_SQFT) + ' sq ft) \u00b7 ' + $('decking_color').value, money(deckCost)]);
+        if($('decking_mode').value === 'area') notes.push('Deck board count includes a 10% waste allowance.');
       }
     }
     if(t === 'fence' || t === 'both'){
@@ -441,13 +491,13 @@
   }
 
   // Wire inputs
-  ['project_type','cladding_area','cladding_boards','cladding_color','trim_lcorner','trim_outside','trim_end','fence_lf','fence_sets','fence_color']
+  ['project_type','cladding_area','cladding_boards','cladding_color','trim_lcorner','trim_outside','trim_end','decking_area','decking_boards','decking_color','fence_lf','fence_sets','fence_color']
     .forEach(function(id){ var el = $(id); if(el){ el.addEventListener('input', recalc); el.addEventListener('change', recalc); } });
   $('project_type').addEventListener('change', function(){ syncBlocks(); recalc(); });
 
   // Deep link ?type=fence / ?type=cladding
   var pt = new URLSearchParams(location.search).get('type');
-  if(pt === 'fence' || pt === 'cladding' || pt === 'both'){ $('project_type').value = pt; }
+  if(pt === 'fence' || pt === 'cladding' || pt === 'decking' || pt === 'both'){ $('project_type').value = pt; }
   syncBlocks(); recalc();
 </script>
 <!-- STICKY MOBILE CTA BAR -->

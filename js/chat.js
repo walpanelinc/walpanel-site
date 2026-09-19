@@ -14,6 +14,16 @@ function smsHref(num, body){
   return 'sms:' + num + sep + 'body=' + encodeURIComponent(body);
 }
 
+// === PAGE CONTEXT ============================
+// The decking page sells a different board at a different coverage, so the
+// bot has to answer deck questions with deck numbers, not cladding numbers.
+function onDeckPage(){
+  try { return /deck/i.test(location.pathname); } catch (e) { return false; }
+}
+function deckContext(raw){
+  return onDeckPage() || /(deck|joist)/i.test(raw || '');
+}
+
 // === INTENT MATCHER ============================
 function classify(text){
   const t = text.toLowerCase();
@@ -25,6 +35,7 @@ function classify(text){
   if (/(color|colour|swatch|finish)/.test(t)) return 'color';
   if (/(deliver|shipping|ship)/.test(t)) return 'delivery';
   if (/(pickup|pick up|warehouse|showroom|address|location|where)/.test(t)) return 'location';
+  if (/(joist|deck|decking|hidden fastener|fastener clip|fascia)/.test(t)) return 'deck';
   if (/(indoor|inside|interior|accent wall|living room|bedroom)/.test(t)) return 'indoor';
   if (/(ground|bury|buried|in[\s-]?ground|soil|dig|concrete footing|post hole)/.test(t)) return 'ground';
   if (/(install|tools|fastener|screw|how do i|mount)/.test(t)) return 'install';
@@ -41,13 +52,22 @@ function classify(text){
 
 // === RESPONSES (short + specific) ============================
 function botReply(intent, raw){
+  const deck = deckContext(raw);
   switch(intent){
     case 'greet':
-      return `Hi! Ask me about cladding, fence kits, pricing, colors, or delivery — or tap <strong>Talk to sales</strong> to text us.`;
+      return deck
+        ? `Hi! Ask me about deck board pricing, sizes, joist spacing, or delivery — or tap <strong>Talk to sales</strong> to text us.`
+        : `Hi! Ask me about cladding, fence kits, pricing, colors, or delivery — or tap <strong>Talk to sales</strong> to text us.`;
+    case 'deck':
+      return `<strong>Deck board</strong> $35.36 each — 1"×6"×16 ft, covers <strong>8 sq ft</strong> (≈$4.42/sq ft). Walnut only, grooved both edges for hidden clips (clips sold separately). Frame at <strong>16" on center</strong>, or 12" for diagonals and stairs. +9.75% CA tax. How big is the deck?`;
     case 'price':
-      return `<strong>108" board</strong> $35.36 · <strong>114"</strong> $37.18 · <strong>Fence kit (6×6)</strong> $248 · <strong>Extra post</strong> $90. Min 15 boards / 5 kits; volume discounts at 30+. +9.75% CA tax. Your project size?`;
+      return deck
+        ? `<strong>Deck board (1"×6"×16 ft)</strong> $35.36 — covers 8 sq ft, ≈$4.42/sq ft. <strong>108" cladding</strong> $35.36 · <strong>Fence kit (6×6)</strong> $248. +9.75% CA tax. Tell me your deck size and I'll ballpark the board count.`
+        : `<strong>108" board</strong> $35.36 · <strong>114"</strong> $37.18 · <strong>Fence kit (6×6)</strong> $248 · <strong>Extra post</strong> $90. Min 15 boards / 5 kits; volume discounts at 30+. +9.75% CA tax. Your project size?`;
     case 'color':
-      return `<strong>Boards</strong>: Black, Teak, Dark Teak, SPG, wood-grain. <strong>Fence</strong>: Black or Brown. Other colors by special order. Which one?`;
+      return deck
+        ? `<strong>Decking</strong>: Walnut only — a mid-tone brown with multi-tone grain. <strong>Cladding</strong>: Teak, Dark Teak, SPG, Maple, Black. <strong>Fence</strong>: Black or Brown. Want a sample?`
+        : `<strong>Boards</strong>: Black, Teak, Dark Teak, SPG, wood-grain. <strong>Fence</strong>: Black or Brown. Other colors by special order. Which one?`;
     case 'delivery':
       return `Delivery up to ~60 mi of Chatsworth: ~$150–250 (<20 mi), $250–400 (20–40), $400–650 (40–60). Pickup is free by appointment. What city?`;
     case 'location':
@@ -57,11 +77,15 @@ function botReply(intent, raw){
     case 'ground':
       return `Fence posts are <strong>surface-mount</strong> (bolt to concrete/footing), not buried. A <a href="find-a-pro.html" style="color:var(--amber-deep);text-decoration:underline">pro</a> can set footings.`;
     case 'install':
-      return `Boards screw to a solid substrate with expansion gaps (you supply screws). Fence is surface-mount — step-by-step PDF on the Fence page.`;
+      return deck
+        ? `Deck boards sit on framing at <strong>16" on center</strong> (12" for diagonal layouts or stair treads) and are held by hidden clips in the side groove — no screw heads up top. Clips are ordered separately; confirm spacing with your local inspector.`
+        : `Boards screw to a solid substrate with expansion gaps (you supply screws). Fence is surface-mount — step-by-step PDF on the Fence page.`;
     case 'fence':
       return `<strong>Fence kit</strong>: 6×6 ft, $248, Black or Brown — 9 panels + post + hardware. Extra bays need one $90 post each. Min 5 kits.`;
     case 'boards':
-      return `<strong>HLC-49 cladding</strong>: 8-5/8"×1", 108" ($35.36) or 114" ($37.18), ~8" coverage each. Outdoor only. Want a board count for your wall?`;
+      return deck
+        ? `<strong>Deck board</strong>: 1"×6"×16 ft, $35.36, covers 8 sq ft, grooved both edges, Walnut. Give me the deck length and width and I'll ballpark the count.`
+        : `<strong>HLC-49 cladding</strong>: 8-5/8"×1", 108" ($35.36) or 114" ($37.18), ~8" coverage each. Outdoor only. Want a board count for your wall?`;
     case 'trim':
       return `Color-matched trims: <strong>L-Corner</strong> $18/$20, <strong>Outside Corner</strong> $26/$28, <strong>End Trim</strong> $26/$28 (108"/114"). Sold with cladding. Your layout?`;
     case 'sample':
@@ -81,8 +105,12 @@ function botReply(intent, raw){
       if (qtyMatch){
         const n = parseInt(qtyMatch[1]);
         const unit = qtyMatch[2].toLowerCase();
-        const money = (v) => '$' + v.toLocaleString('en-US', { maximumFractionDigits: 2 });
+        const money = (v) => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         if (/board|panel|piece|pc/.test(unit)){
+          if (deck){
+            const list = n * 35.36;
+            return `<strong>${n} deck board${n!==1?'s':''}</strong> ≈ ${money(list)} before tax — covers ${n * 8} sq ft. Text us for an exact quote.`;
+          }
           const list = n * 35.36;
           let pct = 0; if (n >= 100) pct = 20; else if (n >= 50) pct = 15; else if (n >= 30) pct = 10;
           let msg = `<strong>${n} board${n!==1?'s':''}</strong> ≈ ${money(list)} before tax`;
@@ -91,6 +119,11 @@ function botReply(intent, raw){
           return msg;
         }
         if (/sq|square|ft|foot|feet/.test(unit) && !/linear|run|fence/.test(raw.toLowerCase())){
+          if (deck){
+            const dPcs = Math.ceil((n * 1.1) / 8);
+            const dList = dPcs * 35.36;
+            return `<strong>${n} sq ft of deck</strong> ≈ ${dPcs} boards with 10% waste, ${money(dList)} before tax. Text us for an exact quote.`;
+          }
           const pcs = Math.ceil((n * 1.1) / 6);
           const list = pcs * 35.36;
           let pct = 0; if (pcs >= 100) pct = 20; else if (pcs >= 50) pct = 15; else if (pcs >= 30) pct = 10;
@@ -151,7 +184,9 @@ function initChat(){
   // Google Voice text + call card — the primary way to reach sales.
   function showTextLink(reason){
     chatState.textLinkShown = true;
-    const body = 'Hi WalPanel! I have a question about your WPC cladding / fence.';
+    const body = onDeckPage()
+      ? 'Hi WalPanel! I have a question about your WPC deck boards.'
+      : 'Hi WalPanel! I have a question about your WPC cladding / fence.';
     const href = smsHref('+18582566236', body);
 
     const wrap = document.createElement('div');
