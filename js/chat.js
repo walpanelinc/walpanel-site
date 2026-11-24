@@ -59,15 +59,15 @@ function botReply(intent, raw){
         ? `Hi! Ask me about deck board pricing, sizes, joist spacing, or delivery — or tap <strong>Talk to sales</strong> to text us.`
         : `Hi! Ask me about cladding, fence kits, pricing, colors, or delivery — or tap <strong>Talk to sales</strong> to text us.`;
     case 'deck':
-      return `<strong>Deck board</strong> $35.36 each — 1"×6"×16 ft, covers <strong>8 sq ft</strong> (≈$4.42/sq ft). Walnut only, grooved both edges for hidden clips (clips sold separately). Frame at <strong>16" on center</strong>, or 12" for diagonals and stairs. +9.75% CA tax. How big is the deck?`;
+      return `<strong>Deck board</strong> $35.36 each — 1"×6"×16 ft, covers <strong>8 sq ft</strong> (≈$4.42/sq ft). Walnut only, grooved both edges for hidden clips (clips sold separately). Frame at <strong>16" on center</strong>, or 12" for diagonals and stairs. +10.25% CA tax. How big is the deck?`;
     case 'price':
       return deck
-        ? `<strong>Deck board (1"×6"×16 ft)</strong> $35.36 — covers 8 sq ft, ≈$4.42/sq ft. <strong>108" cladding</strong> $35.36 · <strong>Fence kit (6×6)</strong> $248. +9.75% CA tax. Tell me your deck size and I'll ballpark the board count.`
-        : `<strong>108" board</strong> $35.36 · <strong>114"</strong> $37.18 · <strong>Fence kit (6×6)</strong> $248 · <strong>Extra post</strong> $90. Min 15 boards / 5 kits; volume discounts at 30+. +9.75% CA tax. Your project size?`;
+        ? `<strong>Deck board (1"×6"×16 ft)</strong> $35.36 — covers 8 sq ft, ≈$4.42/sq ft. <strong>108" cladding</strong> $35.36 · <strong>Fence kit (6×6)</strong> $248. +10.25% CA tax. Tell me your deck size and I'll ballpark the board count.`
+        : `<strong>108" board</strong> $35.36 · <strong>114"</strong> $37.18 · <strong>Fence kit (6×6)</strong> $248 · <strong>End post</strong> $90 (one per run) · <strong>Gate</strong> $498. Min 15 boards / 5 kits. +10.25% CA tax. Your project size?`;
     case 'color':
       return deck
-        ? `<strong>Decking</strong>: Walnut only — a mid-tone brown with multi-tone grain. <strong>Cladding</strong>: Teak, Dark Teak, SPG, Maple, Black. <strong>Fence</strong>: Black or Brown. Want a sample?`
-        : `<strong>Boards</strong>: Black, Teak, Dark Teak, SPG, wood-grain. <strong>Fence</strong>: Black or Brown. Other colors by special order. Which one?`;
+        ? `<strong>Decking</strong>: Walnut only — a mid-tone brown with multi-tone grain. <strong>Cladding</strong>: Maple, Teak, Teak Wood Grain, Dark Teak, SPG, Black, plus black-base two-tones. <strong>Fence</strong>: Black or Brown. Want a sample?`
+        : `<strong>Boards</strong>: Maple (new), Teak, Teak Wood Grain, Dark Teak, SPG, Black, plus black-base two-tones. <strong>Fence</strong>: Black or Brown. Other colors by special order. Which one?`;
     case 'delivery':
       return `Delivery up to ~60 mi of Chatsworth: ~$150–250 (<20 mi), $250–400 (20–40), $400–650 (40–60). Pickup is free by appointment. What city?`;
     case 'location':
@@ -97,7 +97,7 @@ function botReply(intent, raw){
     case 'contractor':
       return `<strong>WalPanel Pros</strong>: trade pricing, same-day quotes, $50 referral bonus, 2–3% quarterly cashback. Text us to apply.`;
     case 'payment':
-      return `<strong>Zelle or cash only</strong>, +9.75% CA tax. No cards or checks.`;
+      return `<strong>Zelle or cash only</strong>, +10.25% CA tax. No cards or checks.`;
     case 'custom':
       return `Non-stock colors via special order (depends on color, qty, timeline). Text us what you need and we'll price it.`;
     case 'qty': {
@@ -112,9 +112,7 @@ function botReply(intent, raw){
             return `<strong>${n} deck board${n!==1?'s':''}</strong> ≈ ${money(list)} before tax — covers ${n * 8} sq ft. Text us for an exact quote.`;
           }
           const list = n * 35.36;
-          let pct = 0; if (n >= 100) pct = 20; else if (n >= 50) pct = 15; else if (n >= 30) pct = 10;
           let msg = `<strong>${n} board${n!==1?'s':''}</strong> ≈ ${money(list)} before tax`;
-          if (pct > 0) msg += ` (−${pct}% volume → ${money(list * (1 - pct/100))})`;
           msg += n >= 15 ? `. Text us for an exact quote.` : `. Min order 15 boards.`;
           return msg;
         }
@@ -126,9 +124,7 @@ function botReply(intent, raw){
           }
           const pcs = Math.ceil((n * 1.1) / 6);
           const list = pcs * 35.36;
-          let pct = 0; if (pcs >= 100) pct = 20; else if (pcs >= 50) pct = 15; else if (pcs >= 30) pct = 10;
           let msg = `<strong>${n} sq ft</strong> ≈ ${pcs} boards (108"), ${money(list)} before tax`;
-          if (pct > 0) msg += ` (−${pct}% → ${money(list * (1 - pct/100))})`;
           return msg + `. Text us for an exact quote.`;
         }
         if (/set/.test(unit) || /fence/.test(raw.toLowerCase())){

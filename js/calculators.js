@@ -2,7 +2,7 @@
    WalPanel — Calculators
    ============================================ */
 
-const TAX = 0.0975;
+const TAX = 0.1025;
 
 const BOARD = {
   108: { price: 35.36, sqftPerPc: 6.00, label: '108"' },
@@ -13,21 +13,13 @@ const FENCE = {
   setPrice: 248.00,
   setWidth: 6,
   extraPostPrice: 90.00,
-  gatePrice: 398.00,
+  gatePrice: 498.00,
   minOrder: 5
 };
 
 const DECK = {
   16: { price: 35.36, sqftPerPc: 8.00, label: '16 ft' }
 };
-
-// volume discount for boards
-function boardDiscount(qty){
-  if (qty >= 100) return 20;
-  if (qty >= 50)  return 15;
-  if (qty >= 30)  return 10;
-  return 0;
-}
 
 function fmt(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
 

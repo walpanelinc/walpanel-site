@@ -99,7 +99,8 @@
         <option value="">All services</option>
         <option>Cladding</option>
         <option>Fence</option>
-        <option>Both</option>
+        <option>Decking</option>
+        <option>Multiple</option>
       </select>
     </div>
 
@@ -128,7 +129,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-brand"><span class="footer-brand-logo" aria-hidden="true"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(28, 36)"><rect x="0" y="0" width="16" height="128" rx="2" fill="currentColor"/><rect x="20" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="40" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="60" y="40" width="16" height="88" rx="2" fill="currentColor"/><rect x="80" y="14" width="16" height="114" rx="2" fill="currentColor"/><rect x="100" y="6" width="16" height="122" rx="2" fill="currentColor"/><rect x="120" y="0" width="16" height="128" rx="2" fill="currentColor"/></g></svg></span><span>WalPanel Inc.</span></div>
-      <p class="footer-tag">Architectural WPC cladding and fence panels, stocked at our Chatsworth showroom. Serving Los Angeles and surrounding markets.</p>
+      <p class="footer-tag">Architectural WPC cladding, composite decking, and modular fence panels, stocked at our Chatsworth showroom. Serving Los Angeles and surrounding markets.</p>
     </div>
     <div>
       <h4>Products</h4>
@@ -175,7 +176,7 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 WalPanel Inc. · Part of <a href="https://wallshell.com" style="color:rgba(245,241,234,.7);opacity:.7" target="_blank" rel="noopener">Wallshell</a>, est. 2002 · All rights reserved.</span>
-    <span><a href="terms.html" style="opacity:.7;color:rgba(245,241,234,.7)">Terms &amp; conditions</a> &middot; <a href="privacy.html" style="opacity:.7;color:rgba(245,241,234,.7)">Privacy</a> &middot; <a href="accessibility.html" style="opacity:.7;color:rgba(245,241,234,.7)">Accessibility</a> · CA sales tax 9.75% added at checkout.</span>
+    <span><a href="terms.html" style="opacity:.7;color:rgba(245,241,234,.7)">Terms &amp; conditions</a> &middot; <a href="privacy.html" style="opacity:.7;color:rgba(245,241,234,.7)">Privacy</a> &middot; <a href="accessibility.html" style="opacity:.7;color:rgba(245,241,234,.7)">Accessibility</a> · CA sales tax 10.25% added at checkout.</span>
   </div>
 </footer>
 
@@ -259,8 +260,8 @@ function filterPros(){
     if (!p.verified) return false;
     if (q && !(p.name.toLowerCase().includes(q) || p.city.toLowerCase().includes(q))) return false;
     if (area && p.area !== area) return false;
-    if (service && service !== 'Both' && !p.services.includes(service)) return false;
-    if (service === 'Both' && !(p.services.includes('Cladding') && p.services.includes('Fence'))) return false;
+    if (service && service !== 'Multiple' && !p.services.includes(service)) return false;
+    if (service === 'Multiple' && p.services.length < 2) return false;
     return true;
   });
   renderPros(filtered);
