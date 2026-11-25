@@ -171,8 +171,10 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
   transition:color .2s var(--ease);
 }
 .nav-call:hover{color:var(--amber-deep)}
-.nav-call svg{width:18px; height:18px; flex-shrink:0; color:var(--amber-deep)}
-@media (max-width:1080px){ .nav-call .nav-call-num{display:none} }
+.nav-call .nav-call-label{font-weight:500; color:var(--ink-soft, inherit)}
+.nav-call .nav-call-num{color:var(--amber-deep); font-variant-numeric:tabular-nums}
+.nav-call:hover .nav-call-num{text-decoration:underline}
+@media (max-width:1360px){ .nav-call .nav-call-label{display:none} }
 
 .nav-toggle{
   display:none;
